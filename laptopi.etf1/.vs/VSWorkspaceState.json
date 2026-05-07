@@ -2,10 +2,18 @@
   "ExpandedNodes": [
     "",
     "\\laptopi.etf1",
+<<<<<<< Updated upstream
     "\\laptopi.etf1\\Models",
     "\\laptopi.etf1\\Models\\enum",
     "\\laptopi.etf1\\wwwroot"
   ],
   "SelectedNode": "\\laptopi.etf1\\Properties",
+=======
+    "\\laptopi.etf1\\Data",
+    "\\laptopi.etf1\\Models",
+    "\\laptopi.etf1\\Models\\enum"
+  ],
+  "SelectedNode": "\\laptopi.etf1\\Models\\Rezervacija.cs",
+>>>>>>> Stashed changes
   "PreviewInSolutionExplorer": false
 }

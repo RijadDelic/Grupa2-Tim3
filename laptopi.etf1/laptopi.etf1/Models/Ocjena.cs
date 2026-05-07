@@ -6,13 +6,15 @@ namespace laptopi.etf1.Models
     public class Ocjena
     {
         [Key]
-        public int ojcenaId {  get; set; }
-        public int vrijednost { get; set; }
-        public DateOnly datumOcjenjivanja { get; set; }
+        private int ojcenaId {  get; set; }
+        [Required]
+        [Range(1, 5, ErrorMessage = "Ocjena mora biti između 1 i 5.")]
+        private int vrijednost { get; set; }
+        private DateOnly datumOcjenjivanja { get; set; }
         [ForeignKey("Artikal")]
-        public int artikalId { get; set; }
+        private int artikalId { get; set; }
         [ForeignKey("Korisnik")]
-        public int korisnikId { get; set; }
+        private int korisnikId { get; set; }
 
     }
 }

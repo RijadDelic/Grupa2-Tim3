@@ -6,10 +6,12 @@ namespace laptopi.etf1.Models
     public class AdminModerator
     {
         [Key]
-        public int adminModeratorId {  get; set; }
-        public string ime {  get; set; }
-        public string email { get; set; }
-        public Uloga uloga { get; set; }
+        private int adminModeratorId {  get; set; }
+        [Required]
+        private string ime {  get; set; }
+        [Required]
+        private string email { get; set; }
+        private Uloga uloga { get; set; }
         
     }
 }

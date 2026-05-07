@@ -7,13 +7,13 @@ namespace laptopi.etf1.Models
     public class Rezervacija
     {
         [Key]
-        public int rezervacijaId { get; set; }
-        public DateOnly datumOd {  get; set; }
-        public DateOnly datumDo { get; set; }
-        public StatusZahtjeva status {  get; set; }
-        public DateOnly datumZahtjeva { get; set; }
+        private int rezervacijaId { get; set; }
+        private DateOnly datumOd {  get; set; }
+        private DateOnly datumDo { get; set; }
+        private StatusZahtjeva status {  get; set; }
+        private DateOnly datumZahtjeva { get; set; }
         [ForeignKey("Korisnik")]
-        public int korisnikId { get; set; }
+        private int korisnikId { get; set; }
 
     }
 }

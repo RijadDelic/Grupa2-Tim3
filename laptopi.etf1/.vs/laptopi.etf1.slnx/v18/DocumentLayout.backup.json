@@ -3,8 +3,21 @@
   "WorkspaceRootPath": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\",
   "Documents": [
     {
+<<<<<<< Updated upstream
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> Stashed changes
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\TransakcijaController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -95,6 +108,7 @@
       "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\data\\migrations\\00000000000000_createidentityschema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+<<<<<<< Updated upstream
       "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -104,6 +118,9 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\enum\\stanje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+=======
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\models\\enum\\stanje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+>>>>>>> Stashed changes
       "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\enum\\stanje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -114,10 +131,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 0,
               "Title": "ZahtjevZaUklanjanjeController.cs",
               "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs",
@@ -125,12 +143,35 @@
               "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs",
               "RelativeToolTip": "laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+=======
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "laptopi.etf1\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-02T22:49:54.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20260502223903_PrvaMigracija.cs",
+              "DocumentMoniker": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
+              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
+              "RelativeToolTip": "laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAnAAAAAAAAAA==",
+>>>>>>> Stashed changes
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-07T11:08:56.75Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 1,
               "Title": "TransakcijaController.cs",
               "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\TransakcijaController.cs",
@@ -309,6 +350,9 @@
             {
               "$type": "Document",
               "DocumentIndex": 10,
+=======
+              "DocumentIndex": 3,
+>>>>>>> Stashed changes
               "Title": "AdminModerator.cs",
               "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\AdminModerator.cs",
               "RelativeDocumentMoniker": "laptopi.etf1\\Models\\AdminModerator.cs",
@@ -321,6 +365,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 11,
               "Title": "Artikal.cs",
               "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Artikal.cs",
@@ -328,11 +373,21 @@
               "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Artikal.cs",
               "RelativeToolTip": "laptopi.etf1\\Models\\Artikal.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+=======
+              "DocumentIndex": 4,
+              "Title": "00000000000000_CreateIdentitySchema.cs",
+              "DocumentMoniker": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
+              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
+              "RelativeToolTip": "laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwBkAAAAiAAAAAAAAAA==",
+>>>>>>> Stashed changes
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-07T10:38:03.388Z"
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 17,
               "Title": "SlikaArtikla.cs",
               "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\SlikaArtikla.cs",
@@ -406,6 +461,9 @@
             {
               "$type": "Document",
               "DocumentIndex": 23,
+=======
+              "DocumentIndex": 6,
+>>>>>>> Stashed changes
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Program.cs",
               "RelativeDocumentMoniker": "laptopi.etf1\\Program.cs",
@@ -417,19 +475,32 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 24,
+=======
+              "DocumentIndex": 0,
+>>>>>>> Stashed changes
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\appsettings.json",
               "RelativeDocumentMoniker": "laptopi.etf1\\appsettings.json",
+<<<<<<< Updated upstream
               "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\appsettings.json",
               "RelativeToolTip": "laptopi.etf1\\appsettings.json",
+=======
+              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\appsettings.json*",
+              "RelativeToolTip": "laptopi.etf1\\appsettings.json*",
+>>>>>>> Stashed changes
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAACTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-05-02T19:06:57.635Z"
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 25,
+=======
+              "DocumentIndex": 5,
+>>>>>>> Stashed changes
               "Title": "Stanje.cs",
               "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\enum\\Stanje.cs",
               "RelativeDocumentMoniker": "laptopi.etf1\\Models\\enum\\Stanje.cs",

@@ -7,17 +7,17 @@ namespace laptopi.etf1.Models
     public class Transakcija
     {
         [Key]
-        public int transakcijaId {  get; set; }
+        private int transakcijaId {  get; set; }
         [ForeignKey("Artikal")]
-        public int artikalId { get; set; }
+        private int artikalId { get; set; }
         [ForeignKey("Korisnik")]
-        public int kupacId { get; set; }
+        private int kupacId { get; set; }
         [ForeignKey("Korisnik")]
-        public int prodavacId { get; set; }
-        public TipTransakcije tipTransakcije { get; set; }
-        public StatusZahtjeva status {  get; set; }
-        public DateOnly datum {  get; set; }
-        public double iznos {  get; set; }
+        private int prodavacId { get; set; }
+        private TipTransakcije tipTransakcije { get; set; }
+        private StatusZahtjeva status {  get; set; }
+        private DateOnly datum {  get; set; }
+        private double iznos {  get; set; }
 
     }
 }
