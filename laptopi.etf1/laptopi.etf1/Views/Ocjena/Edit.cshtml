@@ -1,0 +1,49 @@
+﻿@model laptopi.etf1.Models.Ocjena
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Ocjena</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ojcenaId" />
+            <div class="form-group">
+                <label asp-for="vrijednost" class="control-label"></label>
+                <input asp-for="vrijednost" class="form-control" />
+                <span asp-validation-for="vrijednost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="datumOcjenjivanja" class="control-label"></label>
+                <input asp-for="datumOcjenjivanja" class="form-control" />
+                <span asp-validation-for="datumOcjenjivanja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="artikalId" class="control-label"></label>
+                <input asp-for="artikalId" class="form-control" />
+                <span asp-validation-for="artikalId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="korisnikId" class="control-label"></label>
+                <input asp-for="korisnikId" class="form-control" />
+                <span asp-validation-for="korisnikId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

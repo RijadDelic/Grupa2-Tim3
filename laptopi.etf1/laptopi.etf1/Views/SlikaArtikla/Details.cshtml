@@ -1,0 +1,30 @@
+﻿@model laptopi.etf1.Models.SlikaArtikla
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>SlikaArtikla</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.putanjaDatoteke)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.putanjaDatoteke)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.artikalId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.artikalId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.slikaId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

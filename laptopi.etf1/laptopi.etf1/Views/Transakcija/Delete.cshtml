@@ -1,0 +1,63 @@
+﻿@model laptopi.etf1.Models.Transakcija
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Transakcija</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.artikalId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.artikalId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.kupacId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.kupacId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.prodavacId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.prodavacId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tipTransakcije)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tipTransakcije)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.status)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.datum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.datum)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.iznos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.iznos)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="transakcijaId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

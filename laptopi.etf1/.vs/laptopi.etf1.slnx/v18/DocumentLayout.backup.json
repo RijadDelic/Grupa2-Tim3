@@ -1,30 +1,110 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\",
+  "WorkspaceRootPath": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\models\\adminmoderator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\TransakcijaController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Controllers\\TransakcijaController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\SlikaArtiklaController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Controllers\\SlikaArtiklaController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\RezervacijasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Controllers\\RezervacijasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\PrimjedbasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Controllers\\PrimjedbasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\OcjenaController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Controllers\\OcjenaController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\KorisniksController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Controllers\\KorisniksController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\ArtikalsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:laptopi.etf1\\Controllers\\ArtikalsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\controllers\\adminmoderatorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\controllers\\adminmoderatorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\adminmoderator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\adminmoderator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\data\\migrations\\00000000000000_createidentityschema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\artikal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\artikal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\korisnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\korisnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\ocjena.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\ocjena.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\primjedba.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\primjedba.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\rezervacija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\rezervacija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\slikaartikla.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\slikaartikla.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\transakcija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\transakcija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\zahtjevzauklanjanje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\zahtjevzauklanjanje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\data\\migrations\\20260502223903_prvamigracija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\data\\migrations\\20260502223903_prvamigracija.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\data\\migrations\\00000000000000_createidentityschema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\data\\migrations\\00000000000000_createidentityschema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\models\\enum\\stanje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\pc user\\desktop\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\enum\\stanje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\enum\\stanje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,49 +119,297 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20260502223903_PrvaMigracija.cs",
-              "DocumentMoniker": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
-              "RelativeDocumentMoniker": "laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
-              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
-              "RelativeToolTip": "laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
+              "Title": "ZahtjevZaUklanjanjeController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\ZahtjevZaUklanjanjeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-02T22:39:03.801Z",
+              "WhenOpened": "2026-05-07T11:08:56.75Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "TransakcijaController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\TransakcijaController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\TransakcijaController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\TransakcijaController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\TransakcijaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T11:07:58.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SlikaArtiklaController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\SlikaArtiklaController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\SlikaArtiklaController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\SlikaArtiklaController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\SlikaArtiklaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T11:07:19.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RezervacijasController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\RezervacijasController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\RezervacijasController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\RezervacijasController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\RezervacijasController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T11:06:44.014Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PrimjedbasController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\PrimjedbasController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\PrimjedbasController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\PrimjedbasController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\PrimjedbasController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T11:06:09.14Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OcjenaController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\OcjenaController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\OcjenaController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\OcjenaController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\OcjenaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T11:04:56.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "KorisniksController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\KorisniksController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\KorisniksController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\KorisniksController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\KorisniksController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T11:03:36.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ArtikalsController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\ArtikalsController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\ArtikalsController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\ArtikalsController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\ArtikalsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T11:01:49.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T11:00:55.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AdminModeratorsController.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\AdminModeratorsController.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Controllers\\AdminModeratorsController.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Controllers\\AdminModeratorsController.cs",
+              "RelativeToolTip": "laptopi.etf1\\Controllers\\AdminModeratorsController.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T11:00:40.452Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "laptopi.etf1\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T10:38:01.628Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Korisnik.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Korisnik.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Models\\Korisnik.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Korisnik.cs",
+              "RelativeToolTip": "laptopi.etf1\\Models\\Korisnik.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T10:37:59.888Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Ocjena.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Ocjena.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Models\\Ocjena.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Ocjena.cs",
+              "RelativeToolTip": "laptopi.etf1\\Models\\Ocjena.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T10:37:58.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Primjedba.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Primjedba.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Models\\Primjedba.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Primjedba.cs",
+              "RelativeToolTip": "laptopi.etf1\\Models\\Primjedba.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T10:37:57.238Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Rezervacija.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Rezervacija.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Models\\Rezervacija.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Rezervacija.cs",
+              "RelativeToolTip": "laptopi.etf1\\Models\\Rezervacija.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T10:37:54.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "AdminModerator.cs",
-              "DocumentMoniker": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Models\\AdminModerator.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\AdminModerator.cs",
               "RelativeDocumentMoniker": "laptopi.etf1\\Models\\AdminModerator.cs",
-              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Models\\AdminModerator.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\AdminModerator.cs",
               "RelativeToolTip": "laptopi.etf1\\Models\\AdminModerator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-02T22:36:17.519Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "00000000000000_CreateIdentitySchema.cs",
-              "DocumentMoniker": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
-              "RelativeDocumentMoniker": "laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
-              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
-              "RelativeToolTip": "laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAYwBkAAAAiAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "Artikal.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Artikal.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Models\\Artikal.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Artikal.cs",
+              "RelativeToolTip": "laptopi.etf1\\Models\\Artikal.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-02T22:32:58.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T10:38:03.388Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 17,
+              "Title": "SlikaArtikla.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\SlikaArtikla.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Models\\SlikaArtikla.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\SlikaArtikla.cs",
+              "RelativeToolTip": "laptopi.etf1\\Models\\SlikaArtikla.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T10:37:50.618Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Transakcija.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Transakcija.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Models\\Transakcija.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\Transakcija.cs",
+              "RelativeToolTip": "laptopi.etf1\\Models\\Transakcija.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T10:37:48.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ZahtjevZaUklanjanje.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\ZahtjevZaUklanjanje.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Models\\ZahtjevZaUklanjanje.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\ZahtjevZaUklanjanje.cs",
+              "RelativeToolTip": "laptopi.etf1\\Models\\ZahtjevZaUklanjanje.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T10:37:39.678Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "laptopi.etf1\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-02T22:49:54.443Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "20260502223903_PrvaMigracija.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
+              "RelativeToolTip": "laptopi.etf1\\Data\\Migrations\\20260502223903_PrvaMigracija.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAC0AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-02T22:39:03.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "00000000000000_CreateIdentitySchema.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
+              "RelativeToolTip": "laptopi.etf1\\Data\\Migrations\\00000000000000_CreateIdentitySchema.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-02T22:32:58.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Program.cs",
               "RelativeDocumentMoniker": "laptopi.etf1\\Program.cs",
-              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Program.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Program.cs",
               "RelativeToolTip": "laptopi.etf1\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -89,32 +417,27 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 24,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\appsettings.json",
               "RelativeDocumentMoniker": "laptopi.etf1\\appsettings.json",
-              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\appsettings.json",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\appsettings.json",
               "RelativeToolTip": "laptopi.etf1\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAADAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAACTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-02T19:06:57.635Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-02T19:06:57.635Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 25,
               "Title": "Stanje.cs",
-              "DocumentMoniker": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Models\\enum\\Stanje.cs",
+              "DocumentMoniker": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\enum\\Stanje.cs",
               "RelativeDocumentMoniker": "laptopi.etf1\\Models\\enum\\Stanje.cs",
-              "ToolTip": "C:\\Users\\noape\\source\\repos\\laptopi.etf1\\laptopi.etf1\\Models\\enum\\Stanje.cs",
+              "ToolTip": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\enum\\Stanje.cs",
               "RelativeToolTip": "laptopi.etf1\\Models\\enum\\Stanje.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-02T19:30:21.736Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

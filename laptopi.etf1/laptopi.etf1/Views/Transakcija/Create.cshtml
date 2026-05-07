@@ -1,0 +1,63 @@
+﻿@model laptopi.etf1.Models.Transakcija
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Transakcija</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="artikalId" class="control-label"></label>
+                <input asp-for="artikalId" class="form-control" />
+                <span asp-validation-for="artikalId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kupacId" class="control-label"></label>
+                <input asp-for="kupacId" class="form-control" />
+                <span asp-validation-for="kupacId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="prodavacId" class="control-label"></label>
+                <input asp-for="prodavacId" class="form-control" />
+                <span asp-validation-for="prodavacId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tipTransakcije" class="control-label"></label>
+                <select asp-for="tipTransakcije" class="form-control"></select>
+                <span asp-validation-for="tipTransakcije" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="status" class="control-label"></label>
+                <select asp-for="status" class="form-control"></select>
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="datum" class="control-label"></label>
+                <input asp-for="datum" class="form-control" />
+                <span asp-validation-for="datum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="iznos" class="control-label"></label>
+                <input asp-for="iznos" class="form-control" />
+                <span asp-validation-for="iznos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
