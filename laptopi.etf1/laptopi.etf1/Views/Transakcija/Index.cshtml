@@ -1,4 +1,4 @@
-﻿@model IEnumerable<laptopi.etf1.Models.Transakcija>
+@model IEnumerable<laptopi.etf1.Models.Transakcija>
 
 @{
     ViewData["Title"] = "Index";
@@ -40,25 +40,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.artikalId)
+                @Html.DisplayFor(model => item.artikalId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.kupacId)
+                @Html.DisplayFor(model => item.kupacId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.prodavacId)
+                @Html.DisplayFor(model => item.prodavacId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tipTransakcije)
+                @Html.DisplayFor(model => item.tipTransakcije)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.status)
+                @Html.DisplayFor(model => item.status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.datum)
+                @Html.DisplayFor(model => item.datum)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.iznos)
+                @Html.DisplayFor(model => item.iznos)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.transakcijaId">Edit</a> |

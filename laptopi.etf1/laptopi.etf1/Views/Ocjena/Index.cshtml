@@ -1,4 +1,4 @@
-﻿@model IEnumerable<laptopi.etf1.Models.Ocjena>
+@model IEnumerable<laptopi.etf1.Models.Ocjena>
 
 @{
     ViewData["Title"] = "Index";
@@ -17,7 +17,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.datumOcjenjivanja)
-                <a href="c:\users\noape\desktop\ooad\grupa2-tim3\laptopi.etf1\laptopi.etf1\views\ocjena\index.cshtml">c:\users\noape\desktop\ooad\grupa2-tim3\laptopi.etf1\laptopi.etf1\views\ocjena\index.cshtml</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.artikalId)
@@ -32,16 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.vrijednost)
+                @Html.DisplayFor(model => item.vrijednost)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.datumOcjenjivanja)
+                @Html.DisplayFor(model => item.datumOcjenjivanja)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.artikalId)
+                @Html.DisplayFor(model => item.artikalId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.korisnikId)
+                @Html.DisplayFor(model => item.korisnikId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ocjenaId">Edit</a> |

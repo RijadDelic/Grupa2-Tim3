@@ -1,4 +1,4 @@
-﻿@model laptopi.etf1.Models.ZahtjevZaUklanjanje
+@model laptopi.etf1.Models.ZahtjevZaUklanjanje
 
 @{
     ViewData["Title"] = "Details";
@@ -16,30 +16,35 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.razlog)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.datumZahtjeva)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.datumZahtjeva)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.status)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.status)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.artikalId)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.artikalId)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.korisnikId)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.korisnikId)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.adminModeratorId)
         </dt>

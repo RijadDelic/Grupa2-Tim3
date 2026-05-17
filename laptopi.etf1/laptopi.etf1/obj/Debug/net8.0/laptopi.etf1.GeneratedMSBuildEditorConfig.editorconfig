@@ -17,6 +17,7 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v8.0
+build_property.EntryPointFilePath = 
 build_property.RootNamespace = laptopi.etf1
 build_property.RootNamespace = laptopi.etf1
 build_property.ProjectDir = C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\
@@ -34,72 +35,28 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/AdminModerators/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Nb2RlcmF0b3JzXENyZWF0ZS5jc2h0bWw=
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikal/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/AdminModerators/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Nb2RlcmF0b3JzXERlbGV0ZS5jc2h0bWw=
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikal/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/AdminModerators/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Nb2RlcmF0b3JzXERldGFpbHMuY3NodG1s
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikal/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/AdminModerators/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Nb2RlcmF0b3JzXEVkaXQuY3NodG1s
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikal/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/AdminModerators/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Nb2RlcmF0b3JzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikals/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbHNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikals/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbHNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikals/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbHNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikals/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbHNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikals/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbHNcSW5kZXguY3NodG1s
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Artikal/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWthbFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Korisniks/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtzXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Korisniks/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Korisniks/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtzXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Korisniks/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtzXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Korisniks/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Ocjena/Create.cshtml]
@@ -122,56 +79,44 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedbas/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhc1xDcmVhdGUuY3NodG1s
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedba/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedbas/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhc1xEZWxldGUuY3NodG1s
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedba/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedbas/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhc1xEZXRhaWxzLmNzaHRtbA==
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedba/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedbas/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhc1xFZGl0LmNzaHRtbA==
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedba/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedbas/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhc1xJbmRleC5jc2h0bWw=
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Primjedba/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbWplZGJhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacijas/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFzXENyZWF0ZS5jc2h0bWw=
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacija/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacijas/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFzXERlbGV0ZS5jc2h0bWw=
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacija/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacijas/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFzXERldGFpbHMuY3NodG1s
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacija/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacijas/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFzXEVkaXQuY3NodG1s
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacija/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacijas/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Shared/_LoginPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Rezervacija/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV6ZXJ2YWNpamFcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/SlikaArtikla/Create.cshtml]
@@ -233,15 +178,3 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/ZahtjevZaUklanjanje/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWmFodGpldlphVWtsYW5qYW5qZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/noape/Desktop/OOAD/Grupa2-Tim3/laptopi.etf1/laptopi.etf1/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-i0t9jy554k

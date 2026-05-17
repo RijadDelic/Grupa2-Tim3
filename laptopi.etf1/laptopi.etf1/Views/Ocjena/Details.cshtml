@@ -1,4 +1,4 @@
-﻿@model laptopi.etf1.Models.Ocjena
+@model laptopi.etf1.Models.Ocjena
 
 @{
     ViewData["Title"] = "Details";
@@ -16,18 +16,21 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.vrijednost)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.datumOcjenjivanja)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.datumOcjenjivanja)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.artikalId)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.artikalId)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.korisnikId)
         </dt>

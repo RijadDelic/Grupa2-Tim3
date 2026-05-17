@@ -11,9 +11,8 @@ namespace laptopi.etf1.Data
             : base(options)
         {
         }
-        public DbSet<AdminModerator> AdminModerator { get; set; }
+
         public DbSet<Artikal> Artikal { get; set; }
-        public DbSet<Korisnik> Korisnik { get; set; }
         public DbSet<Ocjena> Ocjena { get; set; }
         public DbSet<Primjedba> Primjedba { get; set; }
         public DbSet<Rezervacija> Rezervacija { get; set; }
@@ -22,10 +21,8 @@ namespace laptopi.etf1.Data
         public DbSet<ZahtjevZaUklanjanje> ZahtjevZaUklanjanje { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<AdminModerator>().ToTable("AdminModerator");
+        { 
             modelBuilder.Entity<Artikal>().ToTable("Artikal");
-            modelBuilder.Entity<Korisnik>().ToTable("Korisnik");
             modelBuilder.Entity<Ocjena>().ToTable("Ocjena");
             modelBuilder.Entity<Primjedba>().ToTable("Primjedba");
             modelBuilder.Entity<Rezervacija>().ToTable("Rezervacija");

@@ -2,6 +2,6 @@
 {
     public enum Uloga
     {
-        Kupac, Prodavac, Moderator
+        Korisnik, Admin, Moderator
     }
 }

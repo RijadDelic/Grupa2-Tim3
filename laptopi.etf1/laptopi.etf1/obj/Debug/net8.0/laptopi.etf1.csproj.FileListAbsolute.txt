@@ -672,9 +672,7 @@ C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\bin\Debug\net8
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
-C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\scopedcss\bundle\laptopi.etf1.styles.css
-C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\scopedcss\projectbundle\laptopi.etf1.bundle.scp.css
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\staticwebassets.development.json
