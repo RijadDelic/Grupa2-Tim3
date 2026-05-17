@@ -2,4 +2,64 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Početna";
 }
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark" style="background-color: #1e2a38;">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">💻 laptopi .etf</a>
+        <form class="d-flex mx-auto w-50">
+            <input class="form-control" type="search" placeholder="Pretraži laptope"
+                   style="background-color: #f0f4f8; border: none;">
+            <button class="btn btn-outline-light ms-2" type="submit">🔍</button>
+        </form>
+        <div>
+            <a href="/Identity/Account/Login" class="btn btn-outline-light me-2">Prijava</a>
+            <a href="/Identity/Account/Register" class="btn btn-primary">Registracija</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Tabovi -->
+<div class="container mt-3">
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" href="#">Svi oglasi</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Prodaja</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Iznajmljivanje</a></li>
+    </ul>
+</div>
+
+<!-- Filteri -->
+<div class="container mt-3 d-flex justify-content-between align-items-center">
+    <div class="d-flex gap-3">
+        <select class="form-select w-auto">
+            <option>Po ocjeni prodavača</option>
+            <option>Po cijeni</option>
+        </select>
+        <select class="form-select w-auto">
+            <option>Sve cijene</option>
+            <option>0 - 200 KM</option>
+            <option>200 - 500 KM</option>
+        </select>
+    </div>
+    <div class="btn-group">
+        <button class="btn btn-dark">Sve</button>
+        <button class="btn btn-outline-secondary">Novo</button>
+        <button class="btn btn-outline-secondary">Polovno</button>
+    </div>
+</div>
+
+<!-- Artikli -->
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h5 class="fw-bold">Dostupni laptopi</h5>
+        <span class="text-muted">0 oglasa</span>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center text-muted py-5">
+            <h4>Trenutno nema oglasa</h4>
+            <p>Budite prvi koji će dodati laptop!</p>
+        </div>
+    </div>
+</div>

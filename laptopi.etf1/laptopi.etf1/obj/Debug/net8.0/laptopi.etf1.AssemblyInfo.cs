@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("laptopi.etf1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be49e0f3c839bfa8f3c297a472d5d56cb5f0a5a2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a21a4481f6a1a5ae7fc3053c21a45aebc759acb2")]
 [assembly: System.Reflection.AssemblyProductAttribute("laptopi.etf1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("laptopi.etf1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
