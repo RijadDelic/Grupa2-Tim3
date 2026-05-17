@@ -1,9 +1,9 @@
 ﻿using laptopi.etf1.Models.@enum;
 using System.ComponentModel.DataAnnotations;
-
+using Microsoft.AspNetCore.Identity;
 namespace laptopi.etf1.Models
 {
-    public class Korisnik //treba se naslijedit iz usera
+    public class Korisnik : IdentityUser
     {
         [Key]
         public int korisnikID { get; set; }

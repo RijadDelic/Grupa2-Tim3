@@ -11,19 +11,12 @@
 using System;
 using System.Reflection;
 
-<<<<<<< Updated upstream
-=======
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
->>>>>>> Stashed changes
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-laptopi.etf1-ce1402f6-5f8a-4f8f-ba10-f8c6bab133eb")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("laptopi.etf1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< Updated upstream
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89de38bd2d38f363af9eeaef0ae29c5bcbc8cd8b")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1fd7600c90274a44f24020cbcbd21badffe38bde")]
->>>>>>> Stashed changes
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18bdfdf276951eaac73e9fad6187a8d9dbc02d6b")]
 [assembly: System.Reflection.AssemblyProductAttribute("laptopi.etf1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("laptopi.etf1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

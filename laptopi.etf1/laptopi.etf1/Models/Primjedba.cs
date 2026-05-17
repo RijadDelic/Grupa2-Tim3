@@ -6,14 +6,14 @@ namespace laptopi.etf1.Models
     public class Primjedba
     {
         [Key]
-        private int primjedbaId { get; set; }
-        private String sadrzaj {  get; set; }
-        private DateOnly datumPrimjedbe {  get; set; }
-        private bool validnost {  get; set; }
+        public int primjedbaId { get; set; }
+        public String sadrzaj {  get; set; }
+        public DateOnly datumPrimjedbe {  get; set; }
+        public bool validnost {  get; set; }
         [ForeignKey ("Artikal")]
-        private int artikalId {  get; set; }
+        public int artikalId {  get; set; }
         [ForeignKey("Korisnik")]
-        private int korisnikId { get; set; }
+        public int korisnikId { get; set; }
 
     }
 }

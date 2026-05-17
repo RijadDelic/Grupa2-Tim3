@@ -34,7 +34,7 @@ namespace laptopi.etf1.Controllers
             }
 
             var ocjena = await _context.Ocjena
-                .FirstOrDefaultAsync(m => m.ojcenaId == id);
+                .FirstOrDefaultAsync(m => m.ocjenaId == id);
             if (ocjena == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace laptopi.etf1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ojcenaId,vrijednost,datumOcjenjivanja,artikalId,korisnikId")] Ocjena ocjena)
         {
-            if (id != ocjena.ojcenaId)
+            if (id != ocjena.ocjenaId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace laptopi.etf1.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OcjenaExists(ocjena.ojcenaId))
+                    if (!OcjenaExists(ocjena.ocjenaId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace laptopi.etf1.Controllers
             }
 
             var ocjena = await _context.Ocjena
-                .FirstOrDefaultAsync(m => m.ojcenaId == id);
+                .FirstOrDefaultAsync(m => m.ocjenaId == id);
             if (ocjena == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace laptopi.etf1.Controllers
 
         private bool OcjenaExists(int id)
         {
-            return _context.Ocjena.Any(e => e.ojcenaId == id);
+            return _context.Ocjena.Any(e => e.ocjenaId == id);
         }
     }
 }

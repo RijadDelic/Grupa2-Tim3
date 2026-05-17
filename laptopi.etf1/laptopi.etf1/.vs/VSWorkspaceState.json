@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Models\\enum"
+    "\\Models",
+    "\\Views",
+    "\\Views\\Shared"
   ],
-  "SelectedNode": "\\Models",
+  "SelectedNode": "\\Models\\AdminModerator.cs",
   "PreviewInSolutionExplorer": false
 }

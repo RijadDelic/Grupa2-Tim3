@@ -6,16 +6,16 @@ namespace laptopi.etf1.Models
     public class Artikal
     {
         [Key]
-        private int ArtikalId { get; set; }
+        public int ArtikalId { get; set; }
         [Required]
         [MinLength(5, ErrorMessage = "Naziv mora imati najmanje 5 karaktera.")]
-        private string naziv {  get; set; }
-        private string opis { get; set; }
-        private Stanje stranje { get; set; }
-        private DateOnly datumObjave { get; set; }
-        private bool aktivnost {  get; set; }
-        private double prosjecnaOcjena { get; set; }
-        private Kategorija kategorija { get; set; }
+        public string naziv {  get; set; }
+        public string opis { get; set; }
+        public Stanje stranje { get; set; }
+        public DateOnly datumObjave { get; set; }
+        public bool aktivnost {  get; set; }
+        public double prosjecnaOcjena { get; set; }
+        public Kategorija kategorija { get; set; }
 
     }
 }

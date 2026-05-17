@@ -7,15 +7,15 @@ namespace laptopi.etf1.Models
     public class ZahtjevZaUklanjanje
     {
         [Key]
-        private int zahtjevId {  get; set; }
-        private string razlog {  get; set; }
-        private DateOnly datumZahtjeva { get; set; }
-        private StatusZahtjeva status { get; set; }
+        public int zahtjevId {  get; set; }
+        public string razlog {  get; set; }
+        public DateOnly datumZahtjeva { get; set; }
+        public StatusZahtjeva status { get; set; }
         [ForeignKey("Artikal")]
-        private int artikalId { get; set; }
+        public int artikalId { get; set; }
         [ForeignKey("Korisnik")]
-        private int korisnikId {  get; set; }
+        public int korisnikId {  get; set; }
         [ForeignKey("AdminModerator")]
-        private int adminModeratorId { get; set; }
+        public int adminModeratorId { get; set; }
     }
 }

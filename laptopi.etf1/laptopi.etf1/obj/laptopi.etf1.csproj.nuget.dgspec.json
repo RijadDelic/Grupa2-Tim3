@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\laptopi.etf1.csproj": {}
+    "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\laptopi.etf1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\laptopi.etf1.csproj": {
+    "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\laptopi.etf1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\laptopi.etf1.csproj",
+        "projectUniqueName": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\laptopi.etf1.csproj",
         "projectName": "laptopi.etf1",
-        "projectPath": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\laptopi.etf1.csproj",
-        "packagesPath": "C:\\Users\\PC user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC user\\Desktop\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\obj\\",
+        "projectPath": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\laptopi.etf1.csproj",
+        "packagesPath": "C:\\Users\\noape\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\noape\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

@@ -6,11 +6,11 @@ namespace laptopi.etf1.Models
     public class SlikaArtikla
     {
         [Key]
-        private int slikaId {  get; set; }
+        public int slikaId {  get; set; }
         [Required]
-        private string putanjaDatoteke { get; set; }
+        public string putanjaDatoteke { get; set; }
         [ForeignKey("Artikal")]
         [Required]
-        private int artikalId {  get; set; }
+        public int artikalId {  get; set; }
     }
 }
