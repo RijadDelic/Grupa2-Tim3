@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\desktop\\ooad\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\desktop\\ooad\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\desktop\\ooad\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\desktop\\ooad\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\desktop\\ooad\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -33,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\desktop\\ooad\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\desktop\\ooad\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|solutionrelative:laptopi.etf1\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F362F69-639F-63FD-F5E8-0C05CB3257F4}|laptopi.etf1\\laptopi.etf1.csproj|c:\\users\\noape\\desktop\\ooad\\grupa2-tim3\\laptopi.etf1\\laptopi.etf1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -94,17 +94,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Program.cs",
               "RelativeDocumentMoniker": "laptopi.etf1\\Program.cs",
               "ToolTip": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Program.cs",
               "RelativeToolTip": "laptopi.etf1\\Program.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAuwDAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-17T19:24:52.549Z",
               "IsPinned": true,
@@ -113,19 +113,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "laptopi.etf1\\Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "laptopi.etf1\\Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-17T22:34:35.762Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "laptopi.etf1\\Views\\_ViewStart.cshtml",
@@ -133,12 +120,11 @@
               "RelativeToolTip": "laptopi.etf1\\Views\\_ViewStart.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-17T22:34:19.361Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-17T22:34:19.361Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "laptopi.etf1\\Views\\Home\\Index.cshtml",
@@ -151,7 +137,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "laptopi.etf1\\Views\\Shared\\_Layout.cshtml",
@@ -159,12 +145,11 @@
               "RelativeToolTip": "laptopi.etf1\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-17T22:20:41.169Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-17T22:20:41.169Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Views\\Shared\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "laptopi.etf1\\Views\\Shared\\_ViewStart.cshtml",
@@ -172,12 +157,11 @@
               "RelativeToolTip": "laptopi.etf1\\Views\\Shared\\_ViewStart.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-17T22:21:14.709Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-17T22:21:14.709Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Views\\Shared\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "laptopi.etf1\\Views\\Shared\\_ViewImports.cshtml",
@@ -185,25 +169,11 @@
               "RelativeToolTip": "laptopi.etf1\\Views\\Shared\\_ViewImports.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-17T22:21:33.568Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-17T22:21:33.568Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "laptopi.etf1\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Properties\\launchSettings.json",
-              "RelativeToolTip": "laptopi.etf1\\Properties\\launchSettings.json",
-              "ViewState": "AgIAABYAAAAAAAAAAAAAABgAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-17T21:35:07.921Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "ApplicationUser.cs",
               "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Models\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "laptopi.etf1\\Models\\ApplicationUser.cs",
@@ -213,6 +183,30 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-17T21:48:00.569Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "laptopi.etf1\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-17T22:34:35.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "laptopi.etf1\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf1\\laptopi.etf1\\Properties\\launchSettings.json",
+              "RelativeToolTip": "laptopi.etf1\\Properties\\launchSettings.json",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAABgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-17T21:35:07.921Z"
             },
             {
               "$type": "Document",
