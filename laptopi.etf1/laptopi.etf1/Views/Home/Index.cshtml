@@ -4,8 +4,13 @@
 @{
     ViewData["Title"] = "Početna";
 }
+@using Microsoft.AspNetCore.Identity
+@using laptopi.etf1.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 <!-- Navbar -->
+
 <nav class="navbar navbar-dark" style="background-color: #1e2a38;">
     <div class="container">
         <a class="navbar-brand fw-bold" href="#">💻 laptopi .etf</a>
@@ -15,8 +20,18 @@
             <button class="btn btn-outline-light ms-2" type="submit">🔍</button>
         </form>
         <div>
-            <a href="/Identity/Account/Login" class="btn btn-outline-light me-2">Prijava</a>
-            <a href="/Identity/Account/Register" class="btn btn-primary">Registracija</a>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <span class="text-white me-3">Zdravo, @UserManager.GetUserName(User)!</span>
+                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-outline-light">Odjava</button>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light me-2">Prijava</a>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Registracija</a>
+            }
         </div>
     </div>
 </nav>

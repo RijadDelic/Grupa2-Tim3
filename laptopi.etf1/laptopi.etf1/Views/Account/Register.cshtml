@@ -1,0 +1,78 @@
+﻿@model laptopi.etf1.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Registracija";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registracija — laptopi.etf</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body style="background-color: #f0f4f8; min-height: 100vh;">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark" style="background-color: #1e2a38;">
+        <div class="container">
+            <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">💻 laptopi .etf</a>
+        </div>
+    </nav>
+
+    <!-- Forma -->
+    <div class="d-flex justify-content-center align-items-center py-5">
+        <div class="card shadow" style="width: 480px; border-radius: 12px; border: none;">
+            <div class="card-body p-4">
+                <h4 class="fw-bold mb-1" style="color: #1e2a38;">Kreirajte račun</h4>
+                <p class="text-muted mb-4">Registrujte se na laptopi.etf</p>
+
+                <form asp-action="Register" method="post">
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <label asp-for="ime" class="form-label fw-semibold">Ime</label>
+                            <input asp-for="ime" class="form-control" placeholder="Vaše ime" />
+                            <span asp-validation-for="ime" class="text-danger small"></span>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label asp-for="prezime" class="form-label fw-semibold">Prezime</label>
+                            <input asp-for="prezime" class="form-control" placeholder="Vaše prezime" />
+                            <span asp-validation-for="prezime" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="email" class="form-label fw-semibold">Email</label>
+                        <input asp-for="email" class="form-control" placeholder="vas@email.com" />
+                        <span asp-validation-for="email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="password" class="form-label fw-semibold">Lozinka</label>
+                        <input asp-for="password" type="password" class="form-control" placeholder="••••••••" />
+                        <span asp-validation-for="password" class="text-danger small"></span>
+                    </div>
+
+                    <button type="submit" class="btn w-100 text-white fw-semibold"
+                            style="background-color: #1e2a38;">
+                        Registruj se
+                    </button>
+                </form>
+
+                <hr class="my-3" />
+                <p class="text-center text-muted mb-0">
+                    Već imate račun?
+                    <a asp-controller="Account" asp-action="Login"
+                       style="color: #1e2a38; font-weight: 600;">Prijavite se</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>

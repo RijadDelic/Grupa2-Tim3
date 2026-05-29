@@ -12,8 +12,8 @@ namespace laptopi.etf1.Models
         [Required]
         [MinLength(3, ErrorMessage = "Prezime mora imati najmanje 3 karaktera.")]
         public string prezime { get; set; }
-        public DateOnly datumRegistracije { get; set; }
-        public bool aktivan { get; set; }
+        public DateTime datumRegistracije { get; set; }
+        public bool aktivan { get; set; } = true;
         public Uloga uloga { get; set; } 
     }
 }

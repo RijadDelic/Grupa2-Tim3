@@ -678,7 +678,7 @@ C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\swae.build.ex.cache
-C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\laptopi..5B156D2C.Up2Date
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\laptopi.etf1.genruntimeconfig.cache
 C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\ref\laptopi.etf1.dll
+C:\Users\noape\Desktop\OOAD\Grupa2-Tim3\laptopi.etf1\laptopi.etf1\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
