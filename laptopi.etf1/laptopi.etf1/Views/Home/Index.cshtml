@@ -1,36 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    ViewData["Title"] = "Početna";
-}
+﻿@model IEnumerable<laptopi.etf1.Models.Artikal>
 @using Microsoft.AspNetCore.Identity
 @using laptopi.etf1.Data
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<!-- Navbar -->
+@{
+    ViewData["Title"] = "Početna";
+}
 
+<!-- Navbar -->
 <nav class="navbar navbar-dark" style="background-color: #1e2a38;">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="#">💻 laptopi .etf</a>
-        <form class="d-flex mx-auto w-50">
+    <div class="container flex-nowrap">
+        <a class="navbar-brand fw-bold flex-shrink-0" href="#">💻 laptopi .etf</a>
+        <form class="d-flex mx-3 flex-grow-1">
             <input class="form-control" type="search" placeholder="Pretraži laptope"
                    style="background-color: #f0f4f8; border: none;">
             <button class="btn btn-outline-light ms-2" type="submit">🔍</button>
         </form>
-        <div>
+        <div class="d-flex align-items-center flex-shrink-0 gap-2">
             @if (SignInManager.IsSignedIn(User))
             {
-                <span class="text-white me-3">Zdravo, @UserManager.GetUserName(User)!</span>
+                <span class="text-white text-nowrap" style="font-size:13px;">Zdravo, @UserManager.GetUserName(User)!</span>
+                <a asp-controller="Artikals" asp-action="Index" class="btn btn-outline-light btn-sm">Moji oglasi</a>
+                <a asp-controller="Artikals" asp-action="Create" class="btn btn-primary btn-sm">+ Dodaj</a>
                 <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                    <button type="submit" class="btn btn-outline-light">Odjava</button>
+                    <button type="submit" class="btn btn-outline-light btn-sm">Odjava</button>
                 </form>
             }
             else
             {
-                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light me-2">Prijava</a>
-                <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Registracija</a>
+                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-sm">Prijava</a>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-sm">Registracija</a>
             }
         </div>
     </div>
@@ -69,12 +69,58 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
         <h5 class="fw-bold">Dostupni laptopi</h5>
-        <span class="text-muted">0 oglasa</span>
+        <span class="text-muted">@Model.Count() oglasa</span>
     </div>
-    <div class="row">
-        <div class="col-12 text-center text-muted py-5">
-            <h4>Trenutno nema oglasa</h4>
-            <p>Budite prvi koji će dodati laptop!</p>
+
+    @if (!Model.Any())
+    {
+        <div class="row">
+            <div class="col-12 text-center text-muted py-5">
+                <h4>Trenutno nema oglasa</h4>
+                <p>Budite prvi koji će dodati laptop!</p>
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var artikal in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        @if (artikal.Slike != null && artikal.Slike.Any())
+                        {
+                            <img src="@artikal.Slike.First().putanjaDatoteke"
+                                 class="card-img-top"
+                                 style="height: 200px; object-fit: cover;"
+                                 alt="@artikal.naziv">
+                        }
+                        else
+                        {
+                            <div class="bg-secondary d-flex align-items-center justify-content-center"
+                                 style="height: 200px;">
+                                <span class="text-white fs-1">💻</span>
+                            </div>
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@artikal.naziv</h5>
+                            <p class="card-text text-muted small">
+                                @(artikal.opis?.Length > 80 ? artikal.opis.Substring(0, 80) + "..." : artikal.opis)
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-secondary">@artikal.kategorija</span>
+                                <span class="text-warning">
+                                    ⭐ @artikal.prosjecnaOcjena.ToString("0.0")
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <a asp-controller="Artikal" asp-action="Detalji" asp-route-id="@artikal.ArtikalId"
+                               class="btn btn-dark w-100">Pogledaj detalje</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>

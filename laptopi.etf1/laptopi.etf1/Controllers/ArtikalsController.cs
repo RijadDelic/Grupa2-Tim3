@@ -1,8 +1,9 @@
 
+using laptopi.etf1.Data;
+using laptopi.etf1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using laptopi.etf1.Models;
-using laptopi.etf1.Data;
 
 public class ArtikalsController : Controller
 {
@@ -20,6 +21,7 @@ public class ArtikalsController : Controller
     }
 
     // GET: ARTIKALS/Details/5
+    [Authorize]
     public async Task<IActionResult> Details(int? artikalid)
     {
         if (artikalid == null)
@@ -38,6 +40,7 @@ public class ArtikalsController : Controller
     }
 
     // GET: ARTIKALS/Create
+    [Authorize]
     public IActionResult Create()
     {
         return View();
@@ -48,10 +51,12 @@ public class ArtikalsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("ArtikalId,naziv,opis,stranje,datumObjave,aktivnost,prosjecnaOcjena,kategorija")] Artikal artikal)
+    public async Task<IActionResult> Create([Bind("ArtikalId,naziv,opis,stranje,datumObjave,aktivnost,prosjecnaOcjena,kategorija,cijena,slikaPath")] Artikal artikal)
     {
         if (ModelState.IsValid)
         {
+            artikal.aktivnost = true;        
+            artikal.datumObjave = DateOnly.FromDateTime(DateTime.Now);
             _context.Add(artikal);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

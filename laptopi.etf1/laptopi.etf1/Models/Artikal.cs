@@ -16,6 +16,11 @@ namespace laptopi.etf1.Models
         public bool aktivnost {  get; set; }
         public double prosjecnaOcjena { get; set; }
         public Kategorija kategorija { get; set; }
+        public ICollection<SlikaArtikla> Slike { get; set; } = new List<SlikaArtikla>();
+
+        [Range(0, double.MaxValue, ErrorMessage = "Cijena mora biti pozitivna.")]
+        public decimal cijena { get; set; }
+        public string? slikaPath { get; set; }
 
     }
 }

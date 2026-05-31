@@ -12,5 +12,6 @@ namespace laptopi.etf1.Models
         [ForeignKey("Artikal")]
         [Required]
         public int artikalId {  get; set; }
+        public Artikal Artikal { get; set; }
     }
 }
