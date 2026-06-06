@@ -6,15 +6,16 @@
 
 @{
     ViewData["Title"] = "Početna";
+    var emailMap = ViewBag.EmailMap as Dictionary<string, string> ?? new Dictionary<string, string>();
 }
 
 <!-- Navbar -->
 <nav class="navbar navbar-dark" style="background-color: #1e2a38;">
     <div class="container flex-nowrap">
         <a class="navbar-brand fw-bold flex-shrink-0" href="#">💻 laptopi .etf</a>
-        <form class="d-flex mx-3 flex-grow-1">
-            <input class="form-control" type="search" placeholder="Pretraži laptope"
-                   style="background-color: #f0f4f8; border: none;">
+        <form class="d-flex mx-3 flex-grow-1" asp-controller="Home" asp-action="Index" method="get">
+            <input class="form-control" type="search" name="pretraga" value="@ViewBag.Pretraga"
+                   placeholder="Pretraži laptope" style="background-color: #f0f4f8; border: none;">
             <button class="btn btn-outline-light ms-2" type="submit">🔍</button>
         </form>
         <div class="d-flex align-items-center flex-shrink-0 gap-2">
@@ -58,11 +59,23 @@
             <option>200 - 500 KM</option>
         </select>
     </div>
-    <div class="btn-group">
-        <button class="btn btn-dark">Sve</button>
-        <button class="btn btn-outline-secondary">Novo</button>
-        <button class="btn btn-outline-secondary">Polovno</button>
-    </div>
+    <form method="get" asp-controller="Home" asp-action="Index" class="d-flex">
+        <input type="hidden" name="pretraga" value="@ViewBag.Pretraga" />
+        <div class="btn-group">
+            <button type="submit" name="stanje" value=""
+                    class="btn @(string.IsNullOrEmpty(ViewBag.Stanje as string) ? "btn-dark" : "btn-outline-secondary")">
+                Sve
+            </button>
+            <button type="submit" name="stanje" value="Novo"
+                    class="btn @(ViewBag.Stanje == "Novo" ? "btn-dark" : "btn-outline-secondary")">
+                Novo
+            </button>
+            <button type="submit" name="stanje" value="Polovno"
+                    class="btn @(ViewBag.Stanje == "Polovno" ? "btn-dark" : "btn-outline-secondary")">
+                Polovno
+            </button>
+        </div>
+    </form>
 </div>
 
 <!-- Artikli -->
@@ -86,11 +99,14 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach (var artikal in Model)
             {
+                var email = artikal.UserId != null && emailMap.ContainsKey(artikal.UserId)
+                    ? emailMap[artikal.UserId] : "";
+
                 <div class="col">
                     <div class="card h-100 shadow-sm">
-                        @if (artikal.Slike != null && artikal.Slike.Any())
+                        @if (!string.IsNullOrEmpty(artikal.slikaPath))
                         {
-                            <img src="@artikal.Slike.First().putanjaDatoteke"
+                            <img src="@artikal.slikaPath"
                                  class="card-img-top"
                                  style="height: 200px; object-fit: cover;"
                                  alt="@artikal.naziv">
@@ -115,8 +131,20 @@
                             </div>
                         </div>
                         <div class="card-footer bg-white border-0">
-                            <a asp-controller="Artikal" asp-action="Detalji" asp-route-id="@artikal.ArtikalId"
-                               class="btn btn-dark w-100">Pogledaj detalje</a>
+                            <button class="btn btn-dark w-100"
+                                    onclick="otvoriDetalje(
+                                '@Html.Raw(artikal.naziv.Replace("'", "\\'"))',
+                                '@Html.Raw((artikal.opis ?? "").Replace("'", "\\'"))',
+                                '@artikal.stranje',
+                                '@artikal.kategorija',
+                                '@artikal.cijena.ToString("0.00")',
+                                '@artikal.prosjecnaOcjena.ToString("0.0")',
+                                '@artikal.datumObjave',
+                                '@artikal.slikaPath',
+                                '@email'
+                                )">
+                                Pogledaj detalje
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -124,3 +152,105 @@
         </div>
     }
 </div>
+
+<!-- Detalji Modal -->
+<div id="detaljiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1050; align-items:center; justify-content:center; padding: 16px;">
+    <div style="background:#fff; border-radius:16px; width:100%; max-width:520px; max-height:90vh; overflow-y:auto; box-shadow: 0 8px 40px rgba(0,0,0,0.18);">
+
+        <!-- Slika -->
+        <div id="modalImgWrap" style="height:240px; background:#f0f4f8; border-radius:16px 16px 0 0; overflow:hidden;">
+            <img id="modalSlika" src="" alt="" style="width:100%; height:100%; object-fit:cover; display:none;" />
+            <div id="modalSlikaPlaceholder" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:56px;">💻</div>
+        </div>
+
+        <!-- Sadržaj -->
+        <div style="padding: 24px 28px 28px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+                <h4 id="modalNaziv" style="margin:0; font-size:20px; font-weight:700; color:#1e2a38; letter-spacing:-0.3px;"></h4>
+                <button onclick="zatvoriDetalje()" style="background:none; border:none; font-size:22px; color:#aaa; cursor:pointer; line-height:1; padding:0 0 0 12px;">✕</button>
+            </div>
+
+            <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
+                <span id="modalStanje" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px;"></span>
+                <span id="modalKategorija" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; background:rgba(30,42,56,0.08); color:#1e2a38;"></span>
+                <span id="modalOcjena" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; background:#fff8e6; color:#b45309;">⭐ <span id="modalOcjenaVal"></span></span>
+            </div>
+
+            <div style="background:#f7f7f5; border-radius:10px; padding:16px; margin-bottom:18px;">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                    <div>
+                        <p style="margin:0; font-size:11px; color:#aaa; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Cijena</p>
+                        <p id="modalCijena" style="margin:4px 0 0; font-size:20px; font-weight:700; color:#1e2a38;"></p>
+                    </div>
+                    <div>
+                        <p style="margin:0; font-size:11px; color:#aaa; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Datum objave</p>
+                        <p id="modalDatum" style="margin:4px 0 0; font-size:14px; font-weight:500; color:#555;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom:24px;">
+                <p style="margin:0 0 8px; font-size:11px; color:#aaa; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Opis</p>
+                <p id="modalOpis" style="margin:0; font-size:14px; color:#444; line-height:1.65;"></p>
+            </div>
+
+            <a id="modalMailBtn" href="#" style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px; background:#1e2a38; color:#fff; border-radius:10px; font-size:14px; font-weight:600; text-decoration:none; box-sizing:border-box; transition:background 0.15s;">
+                ✉️ Kontaktiraj prodavača
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function otvoriDetalje(naziv, opis, stanje, kategorija, cijena, ocjena, datum, slikaPath, email) {
+        document.getElementById('modalNaziv').textContent = naziv;
+        document.getElementById('modalOpis').textContent = opis || 'Nema opisa.';
+        document.getElementById('modalCijena').textContent = cijena > 0 ? cijena + ' KM' : 'Cijena na upit';
+        document.getElementById('modalDatum').textContent = datum;
+        document.getElementById('modalOcjenaVal').textContent = ocjena;
+
+        // Stanje badge
+        var stanjeEl = document.getElementById('modalStanje');
+        stanjeEl.textContent = stanje;
+        stanjeEl.style.background = stanje === 'Novo' ? '#e6f4ea' : '#fff3e0';
+        stanjeEl.style.color = stanje === 'Novo' ? '#2d7a3f' : '#b45309';
+
+        document.getElementById('modalKategorija').textContent = kategorija;
+
+        // Slika
+        var img = document.getElementById('modalSlika');
+        var placeholder = document.getElementById('modalSlikaPlaceholder');
+        if (slikaPath && slikaPath.trim() !== '') {
+            img.src = slikaPath;
+            img.style.display = 'block';
+            placeholder.style.display = 'none';
+        } else {
+            img.style.display = 'none';
+            placeholder.style.display = 'flex';
+        }
+
+        // Mail dugme
+        var mailBtn = document.getElementById('modalMailBtn');
+        if (email && email.trim() !== '') {
+            mailBtn.href = 'mailto:' + email + '?subject=Upit za laptop: ' + encodeURIComponent(naziv);
+            mailBtn.style.opacity = '1';
+            mailBtn.style.pointerEvents = 'auto';
+        } else {
+            mailBtn.href = '#';
+            mailBtn.style.opacity = '0.4';
+            mailBtn.style.pointerEvents = 'none';
+        }
+
+        document.getElementById('detaljiModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function zatvoriDetalje() {
+        document.getElementById('detaljiModal').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('detaljiModal').addEventListener('click', function (e) {
+        if (e.target === this) zatvoriDetalje();
+    });
+</script>

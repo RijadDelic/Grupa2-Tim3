@@ -1,26 +1,57 @@
 ﻿using laptopi.etf1.Data;
+using laptopi.etf1.Models;
+using laptopi.etf1.Models.@enum;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace laptopi.etf1.Controllers
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ApplicationDbContext _context;
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+        _userManager = userManager;
+    }
 
-        public HomeController(ApplicationDbContext context)
+    public async Task<IActionResult> Index(string? pretraga, string? stanje)
+    {
+        var artikli = _context.Artikal.AsQueryable();
+
+        if (!string.IsNullOrEmpty(pretraga))
         {
-            _context = context;
+            artikli = artikli.Where(a => a.naziv.Contains(pretraga) || a.opis.Contains(pretraga));
         }
 
-        public async Task<IActionResult> Index()
+        if (stanje == "Novo")
         {
-            var artikli = await _context.Artikal
-                .Where(a => a.aktivnost == true)
-                .Include(a => a.Slike)
-                .ToListAsync();
-
-            return View(artikli);
+            artikli = artikli.Where(a => a.stranje == Stanje.Novo);
         }
+        else if (stanje == "Polovno")
+        {
+            artikli = artikli.Where(a => a.stranje == Stanje.Polovno);
+        }
+
+        var lista = await artikli.ToListAsync();
+
+        var userIds = lista.Select(a => a.UserId).Distinct().ToList();
+        var emailMap = new Dictionary<string, string>();
+
+        foreach (var uid in userIds)
+        {
+            if (uid != null)
+            {
+                var user = await _userManager.FindByIdAsync(uid);
+                if (user != null)
+                    emailMap[uid] = user.Email;
+            }
+        }
+
+        ViewBag.EmailMap = emailMap;
+        ViewBag.Pretraga = pretraga;
+        ViewBag.Stanje = stanje;
+        return View(lista);
     }
 }

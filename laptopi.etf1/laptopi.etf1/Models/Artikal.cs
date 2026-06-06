@@ -9,11 +9,11 @@ namespace laptopi.etf1.Models
         public int ArtikalId { get; set; }
         [Required]
         [MinLength(5, ErrorMessage = "Naziv mora imati najmanje 5 karaktera.")]
-        public string naziv {  get; set; }
+        public string naziv { get; set; }
         public string opis { get; set; }
         public Stanje stranje { get; set; }
         public DateOnly datumObjave { get; set; }
-        public bool aktivnost {  get; set; }
+        public bool aktivnost { get; set; }
         public double prosjecnaOcjena { get; set; }
         public Kategorija kategorija { get; set; }
         public ICollection<SlikaArtikla> Slike { get; set; } = new List<SlikaArtikla>();
@@ -22,5 +22,6 @@ namespace laptopi.etf1.Models
         public decimal cijena { get; set; }
         public string? slikaPath { get; set; }
 
+        public string? UserId { get; set; }
     }
 }
