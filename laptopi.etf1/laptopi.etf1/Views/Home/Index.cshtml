@@ -7,6 +7,7 @@
 @{
     ViewData["Title"] = "Početna";
     var emailMap = ViewBag.EmailMap as Dictionary<string, string> ?? new Dictionary<string, string>();
+    var isAdmin = SignInManager.IsSignedIn(User) && User.IsInRole("Admin");
 }
 
 <!-- Navbar -->
@@ -89,8 +90,16 @@
     {
         <div class="row">
             <div class="col-12 text-center text-muted py-5">
-                <h4>Trenutno nema oglasa</h4>
-                <p>Budite prvi koji će dodati laptop!</p>
+                @if (!string.IsNullOrEmpty(ViewBag.Pretraga as string))
+                {
+                    <h4>Nema rezultata za "@ViewBag.Pretraga"</h4>
+                    <p>Pokušaj sa drugim pojmom.</p>
+                }
+                else
+                {
+                    <h4>Trenutno nema oglasa</h4>
+                    <p>Budite prvi koji će dodati laptop!</p>
+                }
             </div>
         </div>
     }
@@ -102,7 +111,19 @@
                 var email = artikal.UserId != null && emailMap.ContainsKey(artikal.UserId)
                     ? emailMap[artikal.UserId] : "";
 
-                <div class="col">
+                <div class="col" style="position:relative;">
+                    @if (isAdmin)
+                    {
+                        <form asp-controller="Artikals" asp-action="Delete" asp-route-artikalid="@artikal.ArtikalId"
+                              method="post" style="position:absolute; top:16px; right:16px; z-index:10;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit"
+                                    onclick="return confirm('Obriši oglas \'@Html.Raw(artikal.naziv.Replace("'", "\\'"))\'?')"
+                                    style="width:28px; height:28px; border-radius:50%; background:#e05252; border:none; color:#fff; font-size:18px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow: 0 2px 8px rgba(224,82,82,0.4);">
+                                −
+                            </button>
+                        </form>
+                    }
                     <div class="card h-100 shadow-sm">
                         @if (!string.IsNullOrEmpty(artikal.slikaPath))
                         {
@@ -209,7 +230,6 @@
         document.getElementById('modalDatum').textContent = datum;
         document.getElementById('modalOcjenaVal').textContent = ocjena;
 
-        // Stanje badge
         var stanjeEl = document.getElementById('modalStanje');
         stanjeEl.textContent = stanje;
         stanjeEl.style.background = stanje === 'Novo' ? '#e6f4ea' : '#fff3e0';
@@ -217,7 +237,6 @@
 
         document.getElementById('modalKategorija').textContent = kategorija;
 
-        // Slika
         var img = document.getElementById('modalSlika');
         var placeholder = document.getElementById('modalSlikaPlaceholder');
         if (slikaPath && slikaPath.trim() !== '') {
@@ -229,7 +248,6 @@
             placeholder.style.display = 'flex';
         }
 
-        // Mail dugme
         var mailBtn = document.getElementById('modalMailBtn');
         if (email && email.trim() !== '') {
             mailBtn.href = 'mailto:' + email + '?subject=Upit za laptop: ' + encodeURIComponent(naziv);

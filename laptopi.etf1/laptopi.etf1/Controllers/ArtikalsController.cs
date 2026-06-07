@@ -227,9 +227,11 @@ public class ArtikalsController : Controller
         var artikal = await _context.Artikal.FindAsync(artikalid);
         if (artikal != null)
         {
-            // Sprječava brisanje tuđih artikala
+            // Admin može brisati sve, ostali samo svoje
             var userId = _userManager.GetUserId(User);
-            if (artikal.UserId != userId)
+            bool isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && artikal.UserId != userId)
             {
                 return Forbid();
             }
@@ -245,9 +247,8 @@ public class ArtikalsController : Controller
         }
 
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Home");
     }
-
     private bool ArtikalExists(int? artikalid)
     {
         return _context.Artikal.Any(e => e.ArtikalId == artikalid);

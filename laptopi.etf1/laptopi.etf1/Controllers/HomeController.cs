@@ -54,4 +54,12 @@ public class HomeController : Controller
         ViewBag.Stanje = stanje;
         return View(lista);
     }
+    public async Task<IActionResult> GetEmail(string userId)
+    {
+        if (string.IsNullOrEmpty(userId))
+            return Content("");
+
+        var user = await _userManager.FindByIdAsync(userId);
+        return Content(user?.Email ?? "");
+    }
 }

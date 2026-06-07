@@ -12,6 +12,7 @@ namespace laptopi.etf1.Models
         public string naziv { get; set; }
         public string opis { get; set; }
         public Stanje stranje { get; set; }
+        public TipTransakcije tipTransakcije { get; set; }
         public DateOnly datumObjave { get; set; }
         public bool aktivnost { get; set; }
         public double prosjecnaOcjena { get; set; }
@@ -21,7 +22,6 @@ namespace laptopi.etf1.Models
         [Range(0, double.MaxValue, ErrorMessage = "Cijena mora biti pozitivna.")]
         public decimal cijena { get; set; }
         public string? slikaPath { get; set; }
-
         public string? UserId { get; set; }
     }
 }
