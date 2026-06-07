@@ -7,6 +7,7 @@
 @{
     ViewData["Title"] = "Početna";
     var emailMap = ViewBag.EmailMap as Dictionary<string, string> ?? new Dictionary<string, string>();
+    var ocjeneMap = ViewBag.OcjeneMap as Dictionary<string, string> ?? new Dictionary<string, string>();
     var isAdmin = SignInManager.IsSignedIn(User) && User.IsInRole("Admin");
 }
 
@@ -41,9 +42,24 @@
 <!-- Tabovi -->
 <div class="container mt-3">
     <ul class="nav nav-tabs">
-        <li class="nav-item"><a class="nav-link active" href="#">Svi oglasi</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Prodaja</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Iznajmljivanje</a></li>
+        <li class="nav-item">
+            <a class="nav-link @(string.IsNullOrEmpty(ViewBag.TipTransakcije as string) ? "active" : "")"
+               href="@Url.Action("Index", "Home", new { pretraga = ViewBag.Pretraga, stanje = ViewBag.Stanje })">
+                Svi oglasi
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewBag.TipTransakcije == "Prodaja" ? "active" : "")"
+               href="@Url.Action("Index", "Home", new { pretraga = ViewBag.Pretraga, stanje = ViewBag.Stanje, tipTransakcije = "Prodaja" })">
+                Prodaja
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewBag.TipTransakcije == "Iznajmljivanje" ? "active" : "")"
+               href="@Url.Action("Index", "Home", new { pretraga = ViewBag.Pretraga, stanje = ViewBag.Stanje, tipTransakcije = "Iznajmljivanje" })">
+                Iznajmljivanje
+            </a>
+        </li>
     </ul>
 </div>
 
@@ -62,6 +78,7 @@
     </div>
     <form method="get" asp-controller="Home" asp-action="Index" class="d-flex">
         <input type="hidden" name="pretraga" value="@ViewBag.Pretraga" />
+        <input type="hidden" name="tipTransakcije" value="@ViewBag.TipTransakcije" />
         <div class="btn-group">
             <button type="submit" name="stanje" value=""
                     class="btn @(string.IsNullOrEmpty(ViewBag.Stanje as string) ? "btn-dark" : "btn-outline-secondary")">
@@ -110,6 +127,8 @@
             {
                 var email = artikal.UserId != null && emailMap.ContainsKey(artikal.UserId)
                     ? emailMap[artikal.UserId] : "";
+                var ocjenaKorisnika = artikal.UserId != null && ocjeneMap.ContainsKey(artikal.UserId)
+                    ? ocjeneMap[artikal.UserId] : "N/A";
 
                 <div class="col" style="position:relative;">
                     @if (isAdmin)
@@ -144,10 +163,25 @@
                             <p class="card-text text-muted small">
                                 @(artikal.opis?.Length > 80 ? artikal.opis.Substring(0, 80) + "..." : artikal.opis)
                             </p>
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
                                 <span class="badge bg-secondary">@artikal.kategorija</span>
+                                <span class="badge @(artikal.tipTransakcije.ToString() == "Iznajmljivanje" ? "bg-info" : "bg-success")">
+                                    @artikal.tipTransakcije
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold" style="color:#1e2a38;">
+                                    @if (artikal.cijena > 0)
+                                    {
+                                        @artikal.cijena.ToString("0.00") <text> KM</text>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted" style="font-size:13px;">Cijena na upit</span>
+                                    }
+                                </span>
                                 <span class="text-warning">
-                                    ⭐ @artikal.prosjecnaOcjena.ToString("0.0")
+                                    ⭐ @(ocjenaKorisnika != "N/A" ? ocjenaKorisnika : "N/A")
                                 </span>
                             </div>
                         </div>
@@ -162,7 +196,11 @@
                                 '@artikal.prosjecnaOcjena.ToString("0.0")',
                                 '@artikal.datumObjave',
                                 '@artikal.slikaPath',
-                                '@email'
+                                '@email',
+                                '@artikal.UserId',
+                                '@ocjenaKorisnika',
+                                '@artikal.ArtikalId',
+                                '@artikal.tipTransakcije'
                                 )">
                                 Pogledaj detalje
                             </button>
@@ -178,13 +216,11 @@
 <div id="detaljiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1050; align-items:center; justify-content:center; padding: 16px;">
     <div style="background:#fff; border-radius:16px; width:100%; max-width:520px; max-height:90vh; overflow-y:auto; box-shadow: 0 8px 40px rgba(0,0,0,0.18);">
 
-        <!-- Slika -->
         <div id="modalImgWrap" style="height:240px; background:#f0f4f8; border-radius:16px 16px 0 0; overflow:hidden;">
             <img id="modalSlika" src="" alt="" style="width:100%; height:100%; object-fit:cover; display:none;" />
             <div id="modalSlikaPlaceholder" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:56px;">💻</div>
         </div>
 
-        <!-- Sadržaj -->
         <div style="padding: 24px 28px 28px;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
                 <h4 id="modalNaziv" style="margin:0; font-size:20px; font-weight:700; color:#1e2a38; letter-spacing:-0.3px;"></h4>
@@ -194,7 +230,7 @@
             <div style="display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;">
                 <span id="modalStanje" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px;"></span>
                 <span id="modalKategorija" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; background:rgba(30,42,56,0.08); color:#1e2a38;"></span>
-                <span id="modalOcjena" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; background:#fff8e6; color:#b45309;">⭐ <span id="modalOcjenaVal"></span></span>
+                <span id="modalTipTransakcije" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px;"></span>
             </div>
 
             <div style="background:#f7f7f5; border-radius:10px; padding:16px; margin-bottom:18px;">
@@ -210,25 +246,147 @@
                 </div>
             </div>
 
-            <div style="margin-bottom:24px;">
+            <div style="margin-bottom:18px;">
                 <p style="margin:0 0 8px; font-size:11px; color:#aaa; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Opis</p>
                 <p id="modalOpis" style="margin:0; font-size:14px; color:#444; line-height:1.65;"></p>
             </div>
 
-            <a id="modalMailBtn" href="#" style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px; background:#1e2a38; color:#fff; border-radius:10px; font-size:14px; font-weight:600; text-decoration:none; box-sizing:border-box; transition:background 0.15s;">
+            <!-- Ocjena prodavača -->
+            <div style="background:#f7f7f5; border-radius:10px; padding:16px; margin-bottom:18px;">
+                <p style="margin:0 0 10px; font-size:11px; color:#aaa; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Ocjena prodavača</p>
+                <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <span id="modalOcjenaKorisnika" style="font-size:18px; font-weight:700; color:#1e2a38;"></span>
+                    <div id="zvjezdiceOcjena" style="display:flex; gap:6px;">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <button type="button"
+                                    onclick="ocijeniKorisnika(@i)"
+                                    data-vrijednost="@i"
+                                    class="zvjezdica-btn"
+                                    style="background:none; border:none; font-size:24px; cursor:pointer; padding:0; color:#ddd; transition:color 0.15s;">
+                                ★
+                            </button>
+                        }
+                    </div>
+                </div>
+                <p id="ocjenaPortuka" style="margin:8px 0 0; font-size:12px; color:#aaa;"></p>
+            </div>
+
+            <!-- Kalendar za iznajmljivanje -->
+            <div id="modalKalendarSekcija" style="display:none; margin-bottom:18px;">
+                <p style="margin:0 0 10px; font-size:11px; color:#aaa; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Dostupnost</p>
+                <div id="modalKalendar"></div>
+                <div style="margin-top:12px; display:flex; gap:14px;">
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <div style="width:12px; height:12px; border-radius:3px; background:#fde8e8; border:1px solid #e05252;"></div>
+                        <span style="font-size:12px; color:#555;">Zauzeto</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <div style="width:12px; height:12px; border-radius:3px; background:#e6f4ea; border:1px solid #2d7a3f;"></div>
+                        <span style="font-size:12px; color:#555;">Slobodno</span>
+                    </div>
+                </div>
+            </div>
+
+            <a id="modalMailBtn" href="#" style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px; background:#1e2a38; color:#fff; border-radius:10px; font-size:14px; font-weight:600; text-decoration:none; box-sizing:border-box;">
                 ✉️ Kontaktiraj prodavača
             </a>
         </div>
     </div>
 </div>
 
+@Html.AntiForgeryToken()
+
+<style>
+    .kal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+
+    .kal-naslov {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1e2a38;
+    }
+
+    .kal-nav {
+        background: none;
+        border: 1px solid #e2e2dc;
+        border-radius: 6px;
+        padding: 2px 8px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #555;
+    }
+
+        .kal-nav:hover {
+            background: #f0f4f8;
+        }
+
+    .kal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+    }
+
+    .kal-dan-naziv {
+        text-align: center;
+        font-size: 10px;
+        font-weight: 600;
+        color: #aaa;
+        text-transform: uppercase;
+        padding: 3px 0;
+    }
+
+    .kal-dan {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        font-size: 12px;
+        border: 1px solid #e8e8e3;
+        background: #e6f4ea;
+        color: #2d7a3f;
+    }
+
+        .kal-dan.zauzet {
+            background: #fde8e8;
+            border-color: #e05252;
+            color: #e05252;
+            font-weight: 600;
+        }
+
+        .kal-dan.prazan {
+            border: none;
+            background: none;
+        }
+
+        .kal-dan.proslo {
+            background: #f7f7f5;
+            border-color: #e8e8e3;
+            color: #ccc;
+        }
+</style>
+
 <script>
-    function otvoriDetalje(naziv, opis, stanje, kategorija, cijena, ocjena, datum, slikaPath, email) {
+    var trenutniUserId = null;
+    var kalMjesec = new Date().getMonth();
+    var kalGodina = new Date().getFullYear();
+    var kalZauzetiDatumi = [];
+    var mjeseci = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'Septembar', 'Oktobar', 'Novembar', 'Decembar'];
+    var dani = ['Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub', 'Ned'];
+
+    function otvoriDetalje(naziv, opis, stanje, kategorija, cijena, ocjena, datum, slikaPath, email, userId, ocjenaKorisnika, artikalId, tipTransakcije) {
+        trenutniUserId = userId;
+
         document.getElementById('modalNaziv').textContent = naziv;
         document.getElementById('modalOpis').textContent = opis || 'Nema opisa.';
         document.getElementById('modalCijena').textContent = cijena > 0 ? cijena + ' KM' : 'Cijena na upit';
         document.getElementById('modalDatum').textContent = datum;
-        document.getElementById('modalOcjenaVal').textContent = ocjena;
+        document.getElementById('modalOcjenaKorisnika').textContent = ocjenaKorisnika !== 'N/A' ? '⭐ ' + ocjenaKorisnika : 'Još nije ocijenjen';
 
         var stanjeEl = document.getElementById('modalStanje');
         stanjeEl.textContent = stanje;
@@ -236,6 +394,11 @@
         stanjeEl.style.color = stanje === 'Novo' ? '#2d7a3f' : '#b45309';
 
         document.getElementById('modalKategorija').textContent = kategorija;
+
+        var tipEl = document.getElementById('modalTipTransakcije');
+        tipEl.textContent = tipTransakcije;
+        tipEl.style.background = tipTransakcije === 'Iznajmljivanje' ? '#e0f2fe' : '#e6f4ea';
+        tipEl.style.color = tipTransakcije === 'Iznajmljivanje' ? '#0369a1' : '#2d7a3f';
 
         var img = document.getElementById('modalSlika');
         var placeholder = document.getElementById('modalSlikaPlaceholder');
@@ -259,8 +422,81 @@
             mailBtn.style.pointerEvents = 'none';
         }
 
+        // Kalendar
+        var kalSekcija = document.getElementById('modalKalendarSekcija');
+        if (tipTransakcije === 'Iznajmljivanje') {
+            kalSekcija.style.display = 'block';
+            kalMjesec = new Date().getMonth();
+            kalGodina = new Date().getFullYear();
+            kalZauzetiDatumi = [];
+
+            fetch('/Kalendar/ZauzetiDatumi?artikalId=' + artikalId)
+                .then(r => r.json())
+                .then(datumi => {
+                    kalZauzetiDatumi = datumi;
+                    renderModalKalendar();
+                });
+        } else {
+            kalSekcija.style.display = 'none';
+        }
+
+        document.querySelectorAll('.zvjezdica-btn').forEach(b => {
+            b.style.color = '#ddd';
+            b.disabled = false;
+        });
+        document.getElementById('ocjenaPortuka').textContent = '';
+
         document.getElementById('detaljiModal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
+    }
+
+    function renderModalKalendar() {
+        var kontejner = document.getElementById('modalKalendar');
+        var danas = new Date();
+        danas.setHours(0, 0, 0, 0);
+        var prviDan = new Date(kalGodina, kalMjesec, 1);
+        var zadnjiDan = new Date(kalGodina, kalMjesec + 1, 0);
+        var pocetakDana = (prviDan.getDay() + 6) % 7;
+
+        var html = '<div class="kal-header">';
+        html += '<button class="kal-nav" onclick="kalPromijeniMjesec(-1)">‹</button>';
+        html += '<span class="kal-naslov">' + mjeseci[kalMjesec] + ' ' + kalGodina + '</span>';
+        html += '<button class="kal-nav" onclick="kalPromijeniMjesec(1)">›</button>';
+        html += '</div>';
+        html += '<div class="kal-grid">';
+
+        dani.forEach(function (d) {
+            html += '<div class="kal-dan-naziv">' + d + '</div>';
+        });
+
+        for (var i = 0; i < pocetakDana; i++) {
+            html += '<div class="kal-dan prazan"></div>';
+        }
+
+        for (var d = 1; d <= zadnjiDan.getDate(); d++) {
+            var datumObj = new Date(kalGodina, kalMjesec, d);
+            var datumStr = kalGodina + '-' +
+                String(kalMjesec + 1).padStart(2, '0') + '-' +
+                String(d).padStart(2, '0');
+            var jeZauzet = kalZauzetiDatumi.includes(datumStr);
+            var jeProslo = datumObj < danas;
+
+            var klase = 'kal-dan';
+            if (jeZauzet) klase += ' zauzet';
+            if (jeProslo) klase += ' proslo';
+
+            html += '<div class="' + klase + '">' + d + '</div>';
+        }
+
+        html += '</div>';
+        kontejner.innerHTML = html;
+    }
+
+    function kalPromijeniMjesec(smjer) {
+        kalMjesec += smjer;
+        if (kalMjesec > 11) { kalMjesec = 0; kalGodina++; }
+        if (kalMjesec < 0) { kalMjesec = 11; kalGodina--; }
+        renderModalKalendar();
     }
 
     function zatvoriDetalje() {
@@ -271,4 +507,44 @@
     document.getElementById('detaljiModal').addEventListener('click', function (e) {
         if (e.target === this) zatvoriDetalje();
     });
+
+    document.querySelectorAll('.zvjezdica-btn').forEach(function (btn) {
+        btn.addEventListener('mouseenter', function () {
+            var val = parseInt(this.dataset.vrijednost);
+            document.querySelectorAll('.zvjezdica-btn').forEach(function (b) {
+                b.style.color = parseInt(b.dataset.vrijednost) <= val ? '#f59e0b' : '#ddd';
+            });
+        });
+        btn.addEventListener('mouseleave', function () {
+            document.querySelectorAll('.zvjezdica-btn').forEach(function (b) {
+                b.style.color = '#ddd';
+            });
+        });
+    });
+
+    function ocijeniKorisnika(vrijednost) {
+        if (!trenutniUserId) return;
+
+        fetch('/Ocjena/Ocijeni', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'ocjenjenId=' + encodeURIComponent(trenutniUserId) + '&vrijednost=' + vrijednost + '&__RequestVerificationToken=' + document.querySelector('input[name="__RequestVerificationToken"]').value
+        })
+            .then(r => r.json())
+            .then(data => {
+                var poruka = document.getElementById('ocjenaPortuka');
+                if (data.success) {
+                    document.getElementById('modalOcjenaKorisnika').textContent = '⭐ ' + data.prosjecna;
+                    poruka.textContent = 'Ocjena uspješno dodata!';
+                    poruka.style.color = '#2d7a3f';
+                    document.querySelectorAll('.zvjezdica-btn').forEach(function (b) {
+                        b.style.color = parseInt(b.dataset.vrijednost) <= vrijednost ? '#f59e0b' : '#ddd';
+                        b.disabled = true;
+                    });
+                } else {
+                    poruka.textContent = data.poruka;
+                    poruka.style.color = '#e05252';
+                }
+            });
+    }
 </script>

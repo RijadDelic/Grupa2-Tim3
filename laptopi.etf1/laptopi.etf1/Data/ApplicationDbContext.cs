@@ -19,7 +19,7 @@ namespace laptopi.etf1.Data
         public DbSet<SlikaArtikla> SlikaArtikla { get; set; }
         public DbSet<Transakcija> Transakcija { get; set; }
         public DbSet<ZahtjevZaUklanjanje> ZahtjevZaUklanjanje { get; set; }
-
+        public DbSet<ZauzetDatum> ZauzetDatum { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
             modelBuilder.Entity<Artikal>().ToTable("Artikal");

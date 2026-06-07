@@ -57,6 +57,7 @@
                         </select>
                         <svg class="lp-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
                     </div>
+                    <span asp-validation-for="stranje" class="lp-error"></span>
                 </div>
 
                 <div class="lp-field">
@@ -70,6 +71,21 @@
                         </select>
                         <svg class="lp-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
                     </div>
+                    <span asp-validation-for="kategorija" class="lp-error"></span>
+                </div>
+
+                <div class="lp-field">
+                    <label asp-for="tipTransakcije" class="lp-label">Tip transakcije</label>
+                    <div class="lp-select-wrap">
+                        <select asp-for="tipTransakcije" class="lp-select">
+                            @foreach (var t in Enum.GetValues(typeof(laptopi.etf1.Models.@enum.TipTransakcije)))
+                            {
+                                <option value="@t">@t</option>
+                            }
+                        </select>
+                        <svg class="lp-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+                    </div>
+                    <span asp-validation-for="tipTransakcije" class="lp-error"></span>
                 </div>
             </div>
 

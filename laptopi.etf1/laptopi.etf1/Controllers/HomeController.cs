@@ -16,28 +16,30 @@ public class HomeController : Controller
         _userManager = userManager;
     }
 
-    public async Task<IActionResult> Index(string? pretraga, string? stanje)
+    public async Task<IActionResult> Index(string? pretraga, string? stanje, string? tipTransakcije, string? sortiranje)
     {
         var artikli = _context.Artikal.AsQueryable();
 
         if (!string.IsNullOrEmpty(pretraga))
-        {
             artikli = artikli.Where(a => a.naziv.Contains(pretraga) || a.opis.Contains(pretraga));
-        }
 
         if (stanje == "Novo")
-        {
             artikli = artikli.Where(a => a.stranje == Stanje.Novo);
-        }
         else if (stanje == "Polovno")
-        {
             artikli = artikli.Where(a => a.stranje == Stanje.Polovno);
-        }
+
+        if (tipTransakcije == "Prodaja")
+            artikli = artikli.Where(a => a.tipTransakcije == TipTransakcije.Prodaja);
+        else if (tipTransakcije == "Iznajmljivanje")
+            artikli = artikli.Where(a => a.tipTransakcije == TipTransakcije.Iznajmljivanje);
 
         var lista = await artikli.ToListAsync();
 
+        // Dohvati ocjene korisnika
         var userIds = lista.Select(a => a.UserId).Distinct().ToList();
         var emailMap = new Dictionary<string, string>();
+        var ocjeneMap = new Dictionary<string, string>();
+        var ocjeneMapDouble = new Dictionary<string, double>();
 
         foreach (var uid in userIds)
         {
@@ -46,14 +48,36 @@ public class HomeController : Controller
                 var user = await _userManager.FindByIdAsync(uid);
                 if (user != null)
                     emailMap[uid] = user.Email;
+
+                var prosjecna = await _context.Ocjena
+                    .Where(o => o.ocjenjenId == uid)
+                    .Select(o => (double?)o.vrijednost)
+                    .AverageAsync();
+
+                ocjeneMap[uid] = prosjecna.HasValue ? prosjecna.Value.ToString("0.0") : "N/A";
+                ocjeneMapDouble[uid] = prosjecna ?? 0;
             }
         }
 
+        // Sortiranje
+        lista = sortiranje switch
+        {
+            "cijena_asc" => lista.OrderBy(a => a.cijena).ToList(),
+            "cijena_desc" => lista.OrderByDescending(a => a.cijena).ToList(),
+            "ocjena_desc" => lista.OrderByDescending(a => a.UserId != null && ocjeneMapDouble.ContainsKey(a.UserId) ? ocjeneMapDouble[a.UserId] : 0).ToList(),
+            "ocjena_asc" => lista.OrderBy(a => a.UserId != null && ocjeneMapDouble.ContainsKey(a.UserId) ? ocjeneMapDouble[a.UserId] : 0).ToList(),
+            _ => lista
+        };
+
         ViewBag.EmailMap = emailMap;
+        ViewBag.OcjeneMap = ocjeneMap;
         ViewBag.Pretraga = pretraga;
         ViewBag.Stanje = stanje;
+        ViewBag.TipTransakcije = tipTransakcije;
+        ViewBag.Sortiranje = sortiranje;
         return View(lista);
     }
+
     public async Task<IActionResult> GetEmail(string userId)
     {
         if (string.IsNullOrEmpty(userId))

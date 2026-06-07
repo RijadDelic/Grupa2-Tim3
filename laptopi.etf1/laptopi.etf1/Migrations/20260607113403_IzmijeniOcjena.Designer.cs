@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using laptopi.etf1.Data;
 
@@ -11,9 +12,11 @@ using laptopi.etf1.Data;
 namespace laptopi.etf1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260607113403_IzmijeniOcjena")]
+    partial class IzmijeniOcjena
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -457,27 +460,6 @@ namespace laptopi.etf1.Migrations
                     b.ToTable("ZahtjevZaUklanjanje", (string)null);
                 });
 
-            modelBuilder.Entity("laptopi.etf1.Models.ZauzetDatum", b =>
-                {
-                    b.Property<int>("zauzetDatumId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("zauzetDatumId"));
-
-                    b.Property<int>("artikalId")
-                        .HasColumnType("int");
-
-                    b.Property<DateOnly>("datum")
-                        .HasColumnType("date");
-
-                    b.HasKey("zauzetDatumId");
-
-                    b.HasIndex("artikalId");
-
-                    b.ToTable("ZauzetDatum");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -533,17 +515,6 @@ namespace laptopi.etf1.Migrations
                 {
                     b.HasOne("laptopi.etf1.Models.Artikal", "Artikal")
                         .WithMany("Slike")
-                        .HasForeignKey("artikalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Artikal");
-                });
-
-            modelBuilder.Entity("laptopi.etf1.Models.ZauzetDatum", b =>
-                {
-                    b.HasOne("laptopi.etf1.Models.Artikal", "Artikal")
-                        .WithMany()
                         .HasForeignKey("artikalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

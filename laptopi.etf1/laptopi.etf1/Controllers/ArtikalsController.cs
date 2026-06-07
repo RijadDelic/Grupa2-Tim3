@@ -56,7 +56,7 @@ public class ArtikalsController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(
-        [Bind("ArtikalId,naziv,opis,stranje,datumObjave,aktivnost,prosjecnaOcjena,kategorija,cijena")] Artikal artikal,
+        [Bind("ArtikalId,naziv,opis,stranje,tipTransakcije,datumObjave,aktivnost,prosjecnaOcjena,kategorija,cijena")] Artikal artikal,
         IFormFile? slika)
     {
         if (ModelState.IsValid)
@@ -133,7 +133,7 @@ public class ArtikalsController : Controller
     [Authorize]
     public async Task<IActionResult> Edit(
         int? artikalid,
-        [Bind("ArtikalId,naziv,opis,stranje,datumObjave,aktivnost,prosjecnaOcjena,kategorija,cijena,slikaPath")] Artikal artikal,
+        [Bind("ArtikalId,naziv,opis,stranje,tipTransakcije,datumObjave,aktivnost,prosjecnaOcjena,kategorija,cijena,slikaPath")] Artikal artikal,
         IFormFile? slika)
     {
         if (artikalid != artikal.ArtikalId)
