@@ -1,0 +1,346 @@
+using laptopi.etf1.Data;
+using laptopi.etf1.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+public class ArtikalsController : Controller
+{
+    private readonly ApplicationDbContext _context;
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public ArtikalsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+    {
+        _context = context;
+        _userManager = userManager;
+    }
+
+    // GET: ARTIKALS
+    public async Task<IActionResult> Index()
+    {
+        var userId = _userManager.GetUserId(User);
+        var artikli = await _context.Artikal
+            .Where(a => a.UserId == userId)
+            .ToListAsync();
+        return View(artikli);
+    }
+
+    // GET: ARTIKALS/Details/5
+    [Authorize]
+    public async Task<IActionResult> Details(int? artikalid)
+    {
+        if (artikalid == null)
+            return NotFound();
+
+        var artikal = await _context.Artikal
+            .Include(a => a.User)
+            .FirstOrDefaultAsync(a => a.ArtikalId == artikalid);
+
+        if (artikal == null)
+            return NotFound();
+
+        return View(artikal);
+    }
+
+    // GET: ARTIKALS/Create
+    [Authorize]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    // POST: ARTIKALS/Create
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(
+        [Bind("ArtikalId,naziv,opis,stranje,tipTransakcije,datumObjave,aktivnost,prosjecnaOcjena,kategorija,cijena")] Artikal artikal,
+        List<IFormFile>? slike)
+    {
+        // collect files from binding or Request.Form.Files
+        var files = (slike != null && slike.Count > 0) ? slike : new List<IFormFile>();
+        if ((files == null || files.Count == 0) && Request?.Form?.Files != null && Request.Form.Files.Count > 0)
+        {
+            files = Request.Form.Files.ToList();
+        }
+
+        if (ModelState.IsValid)
+        {
+            var savedPaths = new List<string>();
+            if (files != null && files.Count > 0)
+            {
+                var dozvoljeniTipovi = new[] { "image/jpeg", "image/png", "image/webp" };
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                Directory.CreateDirectory(uploadsFolder);
+
+                foreach (var file in files)
+                {
+                    if (file == null || file.Length == 0) continue;
+                    if (!dozvoljeniTipovi.Contains(file.ContentType))
+                    {
+                        ModelState.AddModelError("slike", "Dozvoljeni formati su JPG, PNG i WEBP.");
+                        return View(artikal);
+                    }
+
+                    if (file.Length > 5 * 1024 * 1024)
+                    {
+                        ModelState.AddModelError("slike", "Slika ne smije biti veća od 5MB.");
+                        return View(artikal);
+                    }
+
+                    var ekstenzija = Path.GetExtension(file.FileName);
+                    var imeFajla = $"{Guid.NewGuid()}{ekstenzija}";
+                    var putanja = Path.Combine(uploadsFolder, imeFajla);
+
+                    using (var stream = new FileStream(putanja, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    savedPaths.Add($"/uploads/{imeFajla}");
+                }
+            }
+
+            artikal.UserId = _userManager.GetUserId(User);
+            artikal.aktivnost = true;
+            artikal.datumObjave = DateOnly.FromDateTime(DateTime.Now);
+            _context.Add(artikal);
+            await _context.SaveChangesAsync();
+
+            if (savedPaths.Any())
+            {
+                var slikeEntities = savedPaths.Select(p => new SlikaArtikla { putanjaDatoteke = p, artikalId = artikal.ArtikalId }).ToList();
+                _context.SlikaArtikla.AddRange(slikeEntities);
+                artikal.slikaPath = savedPaths.First();
+                _context.Update(artikal);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(artikal);
+    }
+
+    // GET: ARTIKALS/Edit/5
+    [Authorize]
+    public async Task<IActionResult> Edit(int? artikalid)
+    {
+        if (artikalid == null)
+        {
+            return NotFound();
+        }
+
+        var artikal = await _context.Artikal.FindAsync(artikalid);
+        if (artikal == null)
+        {
+            return NotFound();
+        }
+
+        // Sprječava editovanje tuđih artikala
+        var userId = _userManager.GetUserId(User);
+        if (artikal.UserId != userId)
+        {
+            return Forbid();
+        }
+
+        return View(artikal);
+    }
+
+    // POST: ARTIKALS/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [Authorize]
+    public async Task<IActionResult> Edit(
+        int? artikalid,
+        [Bind("ArtikalId,naziv,opis,stranje,tipTransakcije,datumObjave,aktivnost,prosjecnaOcjena,kategorija,cijena,slikaPath")] Artikal artikal,
+        List<IFormFile>? slike)
+    {
+        // collect files
+        var files = (slike != null && slike.Count > 0) ? slike : new List<IFormFile>();
+        if ((files == null || files.Count == 0) && Request?.Form?.Files != null && Request.Form.Files.Count > 0)
+        {
+            files = Request.Form.Files.ToList();
+        }
+
+        if (artikalid != artikal.ArtikalId)
+            return NotFound();
+
+        // Sprječava editovanje tuđih artikala
+        var userId = _userManager.GetUserId(User);
+        bool isAdmin = User.IsInRole("Admin");
+
+        // Verify ownership from database (do not trust client-supplied UserId)
+        var existing = await _context.Artikal.AsNoTracking().FirstOrDefaultAsync(a => a.ArtikalId == artikalid);
+        if (existing == null)
+            return NotFound();
+        if (!isAdmin && existing.UserId != userId)
+        {
+            return Forbid();
+        }
+
+        if (ModelState.IsValid)
+        {
+            var savedPaths = new List<string>();
+            if (files != null && files.Count > 0)
+            {
+                var dozvoljeniTipovi = new[] { "image/jpeg", "image/png", "image/webp" };
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                Directory.CreateDirectory(uploadsFolder);
+
+                foreach (var file in files)
+                {
+                    if (file == null || file.Length == 0) continue;
+                    if (!dozvoljeniTipovi.Contains(file.ContentType))
+                    {
+                        ModelState.AddModelError("slike", "Dozvoljeni formati su JPG, PNG i WEBP.");
+                        return View(artikal);
+                    }
+
+                    if (file.Length > 5 * 1024 * 1024)
+                    {
+                        ModelState.AddModelError("slike", "Slika ne smije biti veća od 5MB.");
+                        return View(artikal);
+                    }
+
+                    var ekstenzija = Path.GetExtension(file.FileName);
+                    var imeFajla = $"{Guid.NewGuid()}{ekstenzija}";
+                    var putanja = Path.Combine(uploadsFolder, imeFajla);
+
+                    using (var stream = new FileStream(putanja, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    savedPaths.Add($"/uploads/{imeFajla}");
+                }
+            }
+
+            artikal.UserId = userId;
+
+            try
+            {
+                _context.Update(artikal);
+                await _context.SaveChangesAsync();
+
+                if (savedPaths.Any())
+                {
+                    var slikeEntities = savedPaths.Select(p => new SlikaArtikla { putanjaDatoteke = p, artikalId = artikal.ArtikalId }).ToList();
+                    _context.SlikaArtikla.AddRange(slikeEntities);
+
+                    // update main image if not set
+                    if (string.IsNullOrEmpty(artikal.slikaPath))
+                    {
+                        artikal.slikaPath = savedPaths.First();
+                        _context.Update(artikal);
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ArtikalExists(artikal.ArtikalId))
+                    return NotFound();
+                throw;
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(artikal);
+    }
+
+    // GET: ARTIKALS/Delete/5
+    [Authorize]
+    public async Task<IActionResult> Delete(int? artikalid)
+    {
+        if (artikalid == null)
+        {
+            return NotFound();
+        }
+
+        var artikal = await _context.Artikal
+            .FirstOrDefaultAsync(m => m.ArtikalId == artikalid);
+        if (artikal == null)
+        {
+            return NotFound();
+        }
+
+        // Sprječava brisanje tuđih artikala
+        var userId = _userManager.GetUserId(User);
+        if (artikal.UserId != userId)
+        {
+            return Forbid();
+        }
+
+        return View(artikal);
+    }
+
+    // POST: ARTIKALS/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    [Authorize]
+    public async Task<IActionResult> DeleteConfirmed(int? artikalid)
+    {
+        // support route param 'id' used by modal action '/Artikals/Delete/5'
+        int? id = artikalid;
+        if (id == null)
+        {
+            if (RouteData.Values.ContainsKey("id") && int.TryParse(RouteData.Values["id"]?.ToString(), out var parsedId))
+                id = parsedId;
+            else if (Request?.Form != null && int.TryParse(Request.Form["artikalid"], out var parsedId2))
+                id = parsedId2;
+        }
+
+        Artikal artikal = null;
+        if (id.HasValue)
+        {
+            artikal = await _context.Artikal.FindAsync(id.Value);
+        }
+
+        if (artikal != null)
+        {
+            // Admin može brisati sve, ostali samo svoje
+            var userId = _userManager.GetUserId(User);
+            bool isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && artikal.UserId != userId)
+            {
+                return Forbid();
+            }
+
+            // delete main image file if present
+            if (!string.IsNullOrEmpty(artikal.slikaPath))
+            {
+                var putanja = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", artikal.slikaPath.TrimStart('/'));
+                if (System.IO.File.Exists(putanja))
+                    System.IO.File.Delete(putanja);
+            }
+
+            // delete any additional images stored in SlikaArtikla
+            var dodatne = await _context.SlikaArtikla.Where(s => s.artikalId == artikal.ArtikalId).ToListAsync();
+            if (dodatne.Any())
+            {
+                foreach (var s in dodatne)
+                {
+                    var p = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", s.putanjaDatoteke.TrimStart('/'));
+                    if (System.IO.File.Exists(p)) System.IO.File.Delete(p);
+                }
+                _context.SlikaArtikla.RemoveRange(dodatne);
+            }
+
+            _context.Artikal.Remove(artikal);
+            await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Artikal je uspješno obrisan.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        TempData["ErrorMessage"] = "Artikal nije pronađen ili je već obrisan.";
+        return RedirectToAction(nameof(Index));
+    }
+    private bool ArtikalExists(int? artikalid)
+    {
+        return _context.Artikal.Any(e => e.ArtikalId == artikalid);
+    }
+}

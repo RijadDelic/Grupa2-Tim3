@@ -1,0 +1,510 @@
+﻿@model laptopi.etf1.Models.Artikal
+
+@{
+    ViewData["Title"] = "Uredi oglas";
+    Layout = "_Layout";
+}
+
+<div class="lp-create-wrapper">
+    <div class="lp-create-card">
+
+        <div class="lp-card-header">
+            <div class="lp-header-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="lp-card-title">Uredi oglas</h1>
+                <p class="lp-card-subtitle">Izmijeni podatke o laptоpu</p>
+            </div>
+        </div>
+
+        <form asp-controller="Artikals" asp-action="Edit" asp-route-artikalid="@Model.ArtikalId"
+              method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="ArtikalId" />
+            <input type="hidden" asp-for="slikaPath" />
+            <input type="hidden" asp-for="datumObjave" />
+            <input type="hidden" asp-for="aktivnost" />
+            <input type="hidden" asp-for="prosjecnaOcjena" />
+            <input type="hidden" asp-for="UserId" />
+
+            <div class="lp-section-label">Osnovno</div>
+
+            <div class="lp-field">
+                <label asp-for="naziv" class="lp-label">Naziv laptopa</label>
+                <input asp-for="naziv" class="lp-input" placeholder="npr. Dell XPS 15 9530" autocomplete="off" />
+                <span asp-validation-for="naziv" class="lp-error"></span>
+            </div>
+
+            <div class="lp-field">
+                <label asp-for="opis" class="lp-label">Opis</label>
+                <textarea asp-for="opis" class="lp-textarea" rows="4" placeholder="Opiši laptop..."></textarea>
+                <span asp-validation-for="opis" class="lp-error"></span>
+            </div>
+
+            <div class="lp-row">
+                <div class="lp-field">
+                    <label asp-for="stranje" class="lp-label">Stanje</label>
+                    <div class="lp-select-wrap">
+                        <select asp-for="stranje" class="lp-select">
+                            @foreach (var s in Enum.GetValues(typeof(laptopi.etf1.Models.@enum.Stanje)))
+                            {
+                                <option value="@s">@s</option>
+                            }
+                        </select>
+                        <svg class="lp-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+                    </div>
+                    <span asp-validation-for="stranje" class="lp-error"></span>
+                </div>
+
+                <div class="lp-field">
+                    <label asp-for="kategorija" class="lp-label">Kategorija</label>
+                    <div class="lp-select-wrap">
+                        <select asp-for="kategorija" class="lp-select">
+                            @foreach (var k in Enum.GetValues(typeof(laptopi.etf1.Models.@enum.Kategorija)))
+                            {
+                                <option value="@k">@k</option>
+                            }
+                        </select>
+                        <svg class="lp-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+                    </div>
+                    <span asp-validation-for="kategorija" class="lp-error"></span>
+                </div>
+
+                <div class="lp-field">
+                    <label asp-for="tipTransakcije" class="lp-label">Tip transakcije</label>
+                    <div class="lp-select-wrap">
+                        <select asp-for="tipTransakcije" class="lp-select">
+                            @foreach (var t in Enum.GetValues(typeof(laptopi.etf1.Models.@enum.TipTransakcije)))
+                            {
+                                <option value="@t">@t</option>
+                            }
+                        </select>
+                        <svg class="lp-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+                    </div>
+                    <span asp-validation-for="tipTransakcije" class="lp-error"></span>
+                </div>
+            </div>
+
+            <div class="lp-section-label" style="margin-top:28px;">Cijena</div>
+
+            <div class="lp-field">
+                <label asp-for="cijena" class="lp-label">Cijena</label>
+                <div class="lp-input-prefix-wrap">
+                    <span class="lp-prefix">KM</span>
+                    <input asp-for="cijena" class="lp-input lp-input-prefixed" type="number" min="0" step="0.01" placeholder="0.00" />
+                </div>
+                <span asp-validation-for="cijena" class="lp-error"></span>
+            </div>
+
+            <div class="lp-section-label" style="margin-top:28px;">Slika</div>
+
+            <div class="lp-field">
+                <label class="lp-label">Fotografija laptopa</label>
+
+                @if (!string.IsNullOrEmpty(Model.slikaPath))
+                {
+                    <div style="margin-bottom:12px; border-radius:10px; overflow:hidden; height:180px;">
+                        <img src="@Model.slikaPath" alt="@Model.naziv"
+                             style="width:100%; height:100%; object-fit:cover;" />
+                    </div>
+                    <p style="font-size:12px; color:#aaa; margin-bottom:8px;">Trenutna slika — uploaduj novu da je zamijeniš</p>
+                }
+
+                <div class="lp-dropzone" id="dropzone" onclick="document.getElementById('slikaInput').click()">
+                    <div class="lp-dropzone-inner" id="dropzoneInner">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lp-dropzone-icon">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                        </svg>
+                        <p class="lp-dropzone-text">Klikni ili prevuci novu sliku ovdje</p>
+                        <p class="lp-dropzone-hint">PNG, JPG, WEBP – max 5MB</p>
+                    </div>
+                    <img id="previewImg" class="lp-preview-img" style="display:none;" alt="Preview" />
+                </div>
+                <input type="file" name="slika" id="slikaInput" accept="image/*"
+                       style="display:none;" onchange="handleFile(this)" />
+                <div class="lp-file-info" id="fileInfo" style="display:none;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    <span id="fileName"></span>
+                    <button type="button" class="lp-remove-file" onclick="removeFile()">Ukloni</button>
+                </div>
+            </div>
+
+            <div class="lp-actions">
+                <a asp-action="Index" class="lp-btn lp-btn-ghost">Odustani</a>
+                <button type="submit" class="lp-btn lp-btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    Sačuvaj izmjene
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<style>
+    .lp-create-wrapper {
+        min-height: calc(100vh - 80px);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 40px 16px 60px;
+        background: #f7f7f5;
+    }
+
+    .lp-create-card {
+        width: 100%;
+        max-width: 580px;
+        background: #fff;
+        border: 1px solid #e8e8e3;
+        border-radius: 16px;
+        padding: 36px 40px 40px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    .lp-card-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #f0f0ea;
+    }
+
+    .lp-header-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: #f0f0ea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #444;
+        flex-shrink: 0;
+    }
+
+    .lp-card-title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #1a1a1a;
+        letter-spacing: -0.3px;
+    }
+
+    .lp-card-subtitle {
+        margin: 3px 0 0;
+        font-size: 13px;
+        color: #888;
+    }
+
+    .lp-section-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #aaa;
+        margin-bottom: 14px;
+    }
+
+    .lp-field {
+        margin-bottom: 18px;
+    }
+
+    .lp-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        color: #444;
+        margin-bottom: 6px;
+    }
+
+    .lp-input, .lp-textarea, .lp-select {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #e2e2dc;
+        border-radius: 8px;
+        padding: 10px 13px;
+        font-size: 14px;
+        color: #1a1a1a;
+        background: #fff;
+        outline: none;
+        transition: border-color 0.15s, box-shadow 0.15s;
+        font-family: inherit;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+        .lp-input:focus, .lp-textarea:focus, .lp-select:focus {
+            border-color: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(26,26,26,0.07);
+        }
+
+        .lp-input::placeholder, .lp-textarea::placeholder {
+            color: #bbb;
+        }
+
+    .lp-textarea {
+        resize: vertical;
+        min-height: 100px;
+        line-height: 1.6;
+    }
+
+    .lp-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+
+    .lp-select-wrap {
+        position: relative;
+    }
+
+        .lp-select-wrap .lp-select {
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+    .lp-chevron {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #999;
+    }
+
+    .lp-input-prefix-wrap {
+        position: relative;
+    }
+
+    .lp-prefix {
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 13px;
+        font-weight: 600;
+        color: #999;
+        pointer-events: none;
+    }
+
+    .lp-input-prefixed {
+        padding-left: 44px;
+    }
+
+    .lp-dropzone {
+        border: 1.5px dashed #ddddd8;
+        border-radius: 10px;
+        cursor: pointer;
+        background: #fafaf8;
+        transition: border-color 0.15s, background 0.15s;
+        overflow: hidden;
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .lp-dropzone:hover {
+            border-color: #aaa;
+            background: #f5f5f2;
+        }
+        .lp-dropzone-dragover {
+            border-color: #3a7d44;
+            background: #f0fff4;
+        }
+
+    .lp-dropzone-inner {
+        padding: 28px 20px;
+        text-align: center;
+    }
+
+    .lp-dropzone-icon {
+        color: #ccc;
+        margin-bottom: 10px;
+    }
+
+    .lp-dropzone-text {
+        margin: 0 0 4px;
+        font-size: 13px;
+        color: #666;
+        font-weight: 500;
+    }
+
+    .lp-dropzone-hint {
+        margin: 0;
+        font-size: 12px;
+        color: #bbb;
+    }
+
+    .lp-preview-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .lp-file-info {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: #555;
+    }
+
+        .lp-file-info svg {
+            color: #3a7d44;
+            flex-shrink: 0;
+        }
+
+    .lp-remove-file {
+        margin-left: auto;
+        background: none;
+        border: none;
+        font-size: 12px;
+        color: #e05252;
+        cursor: pointer;
+        padding: 0;
+        font-family: inherit;
+    }
+
+    .lp-error {
+        display: block;
+        font-size: 12px;
+        color: #e05252;
+        margin-top: 4px;
+    }
+
+    .lp-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #f0f0ea;
+    }
+
+    .lp-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.15s;
+        border: 1px solid transparent;
+        font-family: inherit;
+    }
+
+    .lp-btn-ghost {
+        background: transparent;
+        border-color: #e2e2dc;
+        color: #666;
+    }
+
+        .lp-btn-ghost:hover {
+            background: #f5f5f2;
+            color: #333;
+        }
+
+    .lp-btn-primary {
+        background: #1a1a1a;
+        color: #fff;
+        border-color: #1a1a1a;
+        margin-left: auto;
+    }
+
+        .lp-btn-primary:hover {
+            background: #333;
+        }
+
+    @@media (max-width: 600px) {
+        .lp-create-card {
+            padding: 24px 20px 28px;
+        }
+
+        .lp-row {
+            grid-template-columns: 1fr;
+        }
+
+        .lp-actions {
+            flex-direction: column-reverse;
+        }
+
+        .lp-btn-primary {
+            margin-left: 0;
+            justify-content: center;
+        }
+    }
+</style>
+
+<script>
+    (function() {
+        var dropzone = document.getElementById('dropzone');
+        var slikaInput = document.getElementById('slikaInput');
+
+        function showPreview(file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var preview = document.getElementById('previewImg');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                document.getElementById('dropzoneInner').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileInfo').style.display = 'flex';
+        }
+
+        window.handleFile = function(input) {
+            if (input.files && input.files[0]) {
+                showPreview(input.files[0]);
+            }
+        };
+
+        window.removeFile = function() {
+            var dt = new DataTransfer();
+            slikaInput.files = dt.files;
+            document.getElementById('previewImg').style.display = 'none';
+            document.getElementById('dropzoneInner').style.display = 'block';
+            document.getElementById('fileInfo').style.display = 'none';
+        };
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var files = e.dataTransfer.files;
+            if (files && files.length > 0) {
+                var dt = new DataTransfer();
+                dt.items.add(files[0]);
+                slikaInput.files = dt.files;
+                showPreview(files[0]);
+            }
+            dropzone.classList.remove('lp-dropzone-dragover');
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+            dropzone.classList.add('lp-dropzone-dragover');
+        }
+
+        function handleDragLeave(e) {
+            dropzone.classList.remove('lp-dropzone-dragover');
+        }
+
+        if (dropzone) {
+            dropzone.addEventListener('dragover', handleDragOver);
+            dropzone.addEventListener('dragleave', handleDragLeave);
+            dropzone.addEventListener('drop', handleDrop);
+        }
+    })();
+</script>

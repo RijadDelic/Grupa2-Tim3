@@ -1,0 +1,383 @@
+@model laptopi.etf1.Models.Artikal
+@using Microsoft.AspNetCore.Identity
+@using laptopi.etf1.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Detalji artikla";
+    Layout = "_Layout";
+}
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark" style="background-color: #1e2a38;">
+    <div class="container flex-nowrap">
+        <a class="navbar-brand fw-bold flex-shrink-0" href="/">💻 laptopi .etf</a>
+        <div class="d-flex align-items-center flex-shrink-0 gap-2">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <span class="text-white text-nowrap" style="font-size:13px;">Zdravo, @UserManager.GetUserName(User)!</span>
+                <a asp-controller="Artikals" asp-action="Index" class="btn btn-outline-light btn-sm">Moji oglasi</a>
+                <a asp-controller="Artikals" asp-action="Create" class="btn btn-primary btn-sm">+ Dodaj</a>
+                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-outline-light btn-sm">Odjava</button>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-sm">Prijava</a>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-sm">Registracija</a>
+            }
+        </div>
+    </div>
+</nav>
+
+<div class="lp-detail-wrapper">
+
+    <a href="/" class="lp-back-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+        Nazad na početnu
+    </a>
+
+    <div class="lp-detail-card">
+
+        <!-- Slika -->
+        <div class="lp-detail-img">
+            @if (!string.IsNullOrEmpty(Model.slikaPath))
+            {
+                <img src="@Model.slikaPath" alt="@Model.naziv" />
+            }
+            else
+            {
+                <div class="lp-detail-img-placeholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="6" width="20" height="12" rx="2" />
+                        <path d="M8 18v2M16 18v2M6 20h12" />
+                        <path d="M9 10h6M9 13h4" />
+                    </svg>
+                </div>
+            }
+            <div class="lp-detail-badges">
+                <span class="lp-badge @(Model.stranje.ToString() == "Novo" ? "lp-badge-novo" : "lp-badge-polovno")">
+                    @Model.stranje
+                </span>
+                <span class="lp-badge lp-badge-kat">@Model.kategorija</span>
+            </div>
+        </div>
+
+        <!-- Sadržaj -->
+        <div class="lp-detail-body">
+
+            <div class="lp-detail-header">
+                <h1 class="lp-detail-naziv">@Model.naziv</h1>
+                <div class="lp-detail-meta">
+                    <span class="lp-ocjena">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                        @Model.prosjecnaOcjena.ToString("0.0")
+                    </span>
+                    <span class="lp-datum">Objavljeno: @Model.datumObjave.ToString("dd.MM.yyyy")</span>
+                </div>
+            </div>
+
+            <div class="lp-detail-cijena-box">
+                <div>
+                    <p class="lp-box-label">Cijena</p>
+                    @if (Model.cijena > 0)
+                    {
+                        var unit = Model.tipTransakcije.ToString() == "Iznajmljivanje" ? " KM/dan" : " KM";
+                        <p class="lp-cijena-val">@Model.cijena.ToString("0.00")@unit</p>
+                    }
+                    else
+                    {
+                        <p class="lp-cijena-val" style="font-size:16px; color:#aaa; font-weight:400;">Cijena na upit</p>
+                    }
+                </div>
+                <div>
+                    <p class="lp-box-label">Stanje</p>
+                    <p class="lp-box-val">@Model.stranje</p>
+                </div>
+                <div>
+                    <p class="lp-box-label">Kategorija</p>
+                    <p class="lp-box-val">@Model.kategorija</p>
+                </div>
+            </div>
+
+            <div class="lp-detail-opis">
+                <p class="lp-box-label">Opis</p>
+                <p class="lp-opis-text">@(string.IsNullOrEmpty(Model.opis) ? "Nema opisa." : Model.opis)</p>
+            </div>
+
+            <div style="margin-bottom:18px;">
+                <p class="lp-box-label">Prodavac</p>
+                @if (Model.User != null)
+                {
+                    <p class="lp-box-val"><a href="@Url.Action("Profil", "Account", new { id = Model.UserId })">@Model.User.ime @Model.User.prezime</a></p>
+                }
+                else if (!string.IsNullOrEmpty(Model.UserId))
+                {
+                    <p class="lp-box-val">@Model.UserId</p>
+                }
+            </div>
+
+            <div class="lp-detail-actions">
+                <a href="/" class="lp-btn lp-btn-ghost">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+                    Nazad
+                </a>
+                @if (SignInManager.IsSignedIn(User) && UserManager.GetUserId(User) == Model.UserId)
+                {
+                    <a asp-action="Edit" asp-route-artikalid="@Model.ArtikalId" class="lp-btn lp-btn-ghost">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+                        Uredi
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .lp-detail-wrapper {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 32px 24px 80px;
+    }
+
+    .lp-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 13px;
+        color: #999;
+        text-decoration: none;
+        margin-bottom: 24px;
+        padding: 5px 10px 5px 6px;
+        border-radius: 6px;
+        transition: background 0.15s, color 0.15s;
+    }
+
+        .lp-back-btn:hover {
+            background: #1e2a38;
+            color: #fff;
+        }
+
+    .lp-detail-card {
+        background: #fff;
+        border: 1px solid #e8e8e3;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .lp-detail-img {
+        position: relative;
+        height: 320px;
+        background: #f0f4f8;
+        overflow: hidden;
+    }
+
+        .lp-detail-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .lp-detail-img-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #c5cfd8;
+    }
+
+    .lp-detail-badges {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        display: flex;
+        gap: 6px;
+    }
+
+    .lp-badge {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 20px;
+        letter-spacing: 0.03em;
+    }
+
+    .lp-badge-novo {
+        background: #e6f4ea;
+        color: #2d7a3f;
+    }
+
+    .lp-badge-polovno {
+        background: #fff3e0;
+        color: #b45309;
+    }
+
+    .lp-badge-kat {
+        background: rgba(30,42,56,0.75);
+        color: #fff;
+    }
+
+    .lp-detail-body {
+        padding: 28px 32px 32px;
+    }
+
+    .lp-detail-header {
+        margin-bottom: 24px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #f0f0ea;
+    }
+
+    .lp-detail-naziv {
+        font-size: 26px;
+        font-weight: 700;
+        color: #1e2a38;
+        margin: 0 0 10px;
+        letter-spacing: -0.4px;
+    }
+
+    .lp-detail-meta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .lp-ocjena {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #f59e0b;
+    }
+
+    .lp-datum {
+        font-size: 13px;
+        color: #aaa;
+    }
+
+    .lp-detail-cijena-box {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        background: #f7f7f5;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 24px;
+    }
+
+    .lp-box-label {
+        margin: 0 0 5px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: #aaa;
+    }
+
+    .lp-cijena-val {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        color: #1e2a38;
+    }
+
+    .lp-box-val {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+        color: #1e2a38;
+    }
+
+    .lp-detail-opis {
+        margin-bottom: 28px;
+    }
+
+    .lp-opis-text {
+        margin: 0;
+        font-size: 15px;
+        color: #555;
+        line-height: 1.7;
+    }
+
+    .lp-detail-actions {
+        display: flex;
+        gap: 10px;
+        padding-top: 20px;
+        border-top: 1px solid #f0f0ea;
+        align-items: center;
+    }
+
+    .lp-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.15s, border-color 0.15s;
+        border: 1px solid transparent;
+    }
+
+    .lp-btn-ghost {
+        background: transparent;
+        border-color: #e2e2dc;
+        color: #666;
+    }
+
+        .lp-btn-ghost:hover {
+            background: #f5f5f2;
+            color: #333;
+        }
+
+    .lp-btn-primary {
+        background: #1e2a38;
+        color: #fff;
+        border-color: #1e2a38;
+    }
+
+        .lp-btn-primary:hover {
+            background: #2d3f55;
+            color: #fff;
+        }
+
+    @@media (max-width: 640px) {
+        .lp-detail-body {
+            padding: 20px 18px 24px;
+        }
+
+        .lp-detail-cijena-box {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .lp-detail-naziv {
+            font-size: 20px;
+        }
+
+        .lp-detail-actions {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+
+<script>
+    // Dohvati email prodavača via fetch
+    fetch('/Home/GetEmail?userId=@Model.UserId')
+        .then(r => r.text())
+        .then(email => {
+            var btn = document.getElementById('mailBtn');
+            if (email && email.trim() !== '') {
+                btn.href = 'mailto:' + email + '?subject=Upit za laptop: ' + encodeURIComponent('@Html.Raw(Model.naziv.Replace("'", "\\'"))');
+            } else {
+                btn.style.opacity = '0.4';
+                btn.style.pointerEvents = 'none';
+            }
+        });
+</script>

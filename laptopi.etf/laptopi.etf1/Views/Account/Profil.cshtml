@@ -1,0 +1,605 @@
+@model laptopi.etf1.Models.ApplicationUser
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = $"{Model.ime} {Model.prezime}";
+    Layout = "_Layout";
+    var oglasi = ViewBag.Oglasi as List<laptopi.etf1.Models.Artikal> ?? new List<laptopi.etf1.Models.Artikal>();
+    var isOwner = ViewBag.IsOwner == true;
+}
+
+<div class="lp-profile-wrapper">
+    <!-- Profil Header -->
+    <div class="lp-profile-header">
+        <div class="lp-profile-container">
+            <div class="lp-profile-content">
+                <!-- Profilna slika -->
+                <div class="lp-profile-image-section">
+                    <div class="lp-profile-image-wrapper">
+                        @if (!string.IsNullOrEmpty(Model.profileImagePath))
+                        {
+                            <img src="@Model.profileImagePath" alt="@Model.ime @Model.prezime" class="lp-profile-image" />
+                        }
+                        else
+                        {
+                            <div class="lp-profile-image-placeholder">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                            </div>
+                        }
+                        @if (isOwner)
+                        {
+                            <form asp-action="UploadProfileImage" method="post" enctype="multipart/form-data" class="lp-profile-upload-form">
+                                <input type="file" name="profileImage" accept="image/*" onchange="this.form.submit()" style="display:none;" id="profileImageInput" />
+                                <button type="button" class="lp-profile-upload-btn" onclick="document.getElementById('profileImageInput').click()">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                    </svg>
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+
+                <!-- Informacije o prodavcu -->
+                <div class="lp-profile-info">
+                    <h1 class="lp-profile-name">@Model.ime @Model.prezime</h1>
+                    <p class="lp-profile-email">📧 @Model.Email</p>
+                    <p class="lp-profile-joined">Član od @Model.datumRegistracije.ToString("dd.MM.yyyy")</p>
+
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success mt-3" style="border-radius: 8px; padding: 12px 14px; font-size: 13px;">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger mt-3" style="border-radius: 8px; padding: 12px 14px; font-size: 13px;">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Akcije -->
+            <div class="lp-profile-actions">
+                @if (!isOwner)
+                {
+                    <a href="mailto:@Model.Email?subject=Upit%20za%20laptop" class="lp-btn lp-btn-contact">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        Pošalji poruku
+                    </a>
+                }
+                @if (isOwner)
+                {
+                    <a asp-controller="Artikals" asp-action="Create" class="lp-btn lp-btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        Dodaj oglas
+                    </a>
+                }
+                <a asp-controller="Home" asp-action="Index" class="lp-btn lp-btn-ghost">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Nazad
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Oglasi prodavca -->
+    <div class="lp-profile-listings">
+        <div class="lp-container">
+            <div class="lp-listings-header">
+                <h2 class="lp-listings-title">Oglasi (@oglasi.Count())</h2>
+            </div>
+
+            @if (!oglasi.Any())
+            {
+                <div class="lp-empty-listings">
+                    <div class="lp-empty-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="6" width="20" height="12" rx="2" />
+                            <path d="M8 18v2M16 18v2M6 20h12" />
+                        </svg>
+                    </div>
+                    <p class="lp-empty-title">Nema objavljenih oglasa</p>
+                    @if (isOwner)
+                    {
+                        <p class="lp-empty-sub">Dodajte svoj prvi laptop!</p>
+                        <a asp-controller="Artikals" asp-action="Create" class="lp-btn lp-btn-primary" style="margin-top:16px;">
+                            + Dodaj oglas
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="lp-listings-grid">
+                    @foreach (var artikal in oglasi)
+                    {
+                        <div class="lp-listing-card">
+                            <div class="lp-listing-img">
+                                @if (!string.IsNullOrEmpty(artikal.slikaPath))
+                                {
+                                    <img src="@artikal.slikaPath" alt="@artikal.naziv" />
+                                }
+                                else
+                                {
+                                    <div class="lp-listing-img-placeholder">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="2" y="6" width="20" height="12" rx="2" />
+                                            <path d="M8 18v2M16 18v2M6 20h12" />
+                                            <path d="M9 10h6M9 13h4" />
+                                        </svg>
+                                    </div>
+                                }
+                                <div class="lp-listing-badges">
+                                    <span class="lp-badge @(artikal.stranje.ToString() == "Novo" ? "lp-badge-novo" : "lp-badge-polovno")">
+                                        @artikal.stranje
+                                    </span>
+                                    <span class="lp-badge lp-badge-tip @(artikal.tipTransakcije.ToString() == "Iznajmljivanje" ? "lp-badge-rental" : "lp-badge-sale")">
+                                        @artikal.tipTransakcije
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="lp-listing-body">
+                                <h3 class="lp-listing-naziv">@artikal.naziv</h3>
+                                <p class="lp-listing-opis">
+                                    @(artikal.opis?.Length > 80 ? artikal.opis.Substring(0, 80) + "..." : artikal.opis)
+                                </p>
+
+                                <div class="lp-listing-footer">
+                                    <div class="lp-listing-price">
+                                        @if (artikal.cijena > 0)
+                                        {
+                                            var unit = artikal.tipTransakcije.ToString() == "Iznajmljivanje" ? " KM/dan" : " KM";
+                                            <span class="lp-price-val">@artikal.cijena.ToString("0.00")@unit</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="lp-price-val" style="font-size:13px; color:#aaa;">Cijena na upit</span>
+                                        }
+                                    </div>
+                                    <div class="lp-listing-actions">
+                                        @if (isOwner)
+                                        {
+                                            <a asp-controller="Artikals" asp-action="Edit" asp-route-artikalid="@artikal.ArtikalId" class="lp-listing-btn lp-listing-edit" title="Uredi">
+                                                ✎
+                                            </a>
+                                        }
+                                        <a asp-controller="Artikals" asp-action="Details" asp-route-artikalid="@artikal.ArtikalId" class="lp-listing-btn lp-listing-view" title="Pogledaj">
+                                            👁
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .lp-profile-wrapper {
+        background: #f7f7f5;
+        min-height: 100vh;
+    }
+
+    .lp-profile-header {
+        background: linear-gradient(135deg, #1e2a38 0%, #2d3f55 100%);
+        color: #fff;
+        padding: 40px 24px;
+    }
+
+    .lp-profile-container {
+        max-width: 1140px;
+        margin: 0 auto;
+        display: flex;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .lp-profile-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 28px;
+        flex: 1;
+    }
+
+    .lp-profile-image-section {
+        flex-shrink: 0;
+    }
+
+    .lp-profile-image-wrapper {
+        position: relative;
+        width: 140px;
+        height: 140px;
+    }
+
+    .lp-profile-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        object-fit: cover;
+        border: 3px solid #fff;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .lp-profile-image-placeholder {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.6);
+        border: 3px solid rgba(255,255,255,0.3);
+    }
+
+    .lp-profile-upload-btn {
+        position: absolute;
+        bottom: -8px;
+        right: -8px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #2d7a3f;
+        border: 3px solid #fff;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        padding: 0;
+    }
+
+        .lp-profile-upload-btn:hover {
+            background: #1f5a2d;
+        }
+
+    .lp-profile-info {
+        flex: 1;
+    }
+
+    .lp-profile-name {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0 0 8px;
+        letter-spacing: -0.5px;
+    }
+
+    .lp-profile-email {
+        font-size: 14px;
+        margin: 0 0 4px;
+        opacity: 0.95;
+    }
+
+    .lp-profile-joined {
+        font-size: 13px;
+        opacity: 0.8;
+        margin: 0;
+    }
+
+    .lp-profile-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+    }
+
+    .lp-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.15s;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .lp-btn-primary {
+        background: #2d7a3f;
+        color: #fff;
+        border-color: #2d7a3f;
+    }
+
+        .lp-btn-primary:hover {
+            background: #1f5a2d;
+            border-color: #1f5a2d;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(45,122,63,0.2);
+        }
+
+    .lp-btn-contact {
+        background: #0369a1;
+        color: #fff;
+        border-color: #0369a1;
+    }
+
+        .lp-btn-contact:hover {
+            background: #0c5a8a;
+            border-color: #0c5a8a;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(3,105,161,0.2);
+        }
+
+    .lp-btn-ghost {
+        background: transparent;
+        color: #fff;
+        border-color: rgba(255,255,255,0.3);
+    }
+
+        .lp-btn-ghost:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+        }
+
+    .lp-profile-listings {
+        padding: 48px 24px;
+    }
+
+    .lp-container {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+
+    .lp-listings-header {
+        margin-bottom: 32px;
+    }
+
+    .lp-listings-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1e2a38;
+        margin: 0;
+        letter-spacing: -0.3px;
+    }
+
+    .lp-empty-listings {
+        text-align: center;
+        padding: 80px 20px;
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid #e8e8e3;
+    }
+
+    .lp-empty-icon {
+        width: 72px;
+        height: 72px;
+        background: #f0f4f8;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: #c5cfd8;
+    }
+
+    .lp-empty-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #555;
+        margin: 0 0 6px;
+    }
+
+    .lp-empty-sub {
+        font-size: 14px;
+        color: #bbb;
+        margin: 0;
+    }
+
+    .lp-listings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 18px;
+    }
+
+    .lp-listing-card {
+        background: #fff;
+        border: 1px solid #e8e8e3;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.2s;
+    }
+
+        .lp-listing-card:hover {
+            box-shadow: 0 4px 16px rgba(30,42,56,0.08);
+            transform: translateY(-2px);
+        }
+
+    .lp-listing-img {
+        position: relative;
+        height: 160px;
+        background: #f0f4f8;
+        overflow: hidden;
+    }
+
+        .lp-listing-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .lp-listing-img-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #c5cfd8;
+    }
+
+    .lp-listing-badges {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        display: flex;
+        gap: 4px;
+    }
+
+    .lp-badge {
+        font-size: 10px;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 18px;
+        letter-spacing: 0.03em;
+    }
+
+    .lp-badge-novo {
+        background: #e6f4ea;
+        color: #2d7a3f;
+    }
+
+    .lp-badge-polovno {
+        background: #fff3e0;
+        color: #b45309;
+    }
+
+    .lp-badge-tip {
+        background: rgba(30,42,56,0.8);
+        color: #fff;
+    }
+
+    .lp-badge-rental {
+        background: #e0f2fe !important;
+        color: #0369a1 !important;
+    }
+
+    .lp-badge-sale {
+        background: #e6f4ea !important;
+        color: #2d7a3f !important;
+    }
+
+    .lp-listing-body {
+        padding: 14px;
+    }
+
+    .lp-listing-naziv {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1e2a38;
+        margin: 0 0 6px;
+        letter-spacing: -0.2px;
+    }
+
+    .lp-listing-opis {
+        font-size: 12px;
+        color: #888;
+        margin: 0 0 12px;
+        line-height: 1.5;
+    }
+
+    .lp-listing-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+        border-top: 1px solid #f0f0ea;
+    }
+
+    .lp-listing-price {
+        flex: 1;
+    }
+
+    .lp-price-val {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e2a38;
+        letter-spacing: -0.2px;
+    }
+
+    .lp-listing-actions {
+        display: flex;
+        gap: 6px;
+    }
+
+    .lp-listing-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        font-size: 13px;
+        text-decoration: none;
+        border: 1px solid #e2e2dc;
+        background: #fff;
+        transition: all 0.15s;
+        cursor: pointer;
+    }
+
+    .lp-listing-edit {
+        color: #f59e0b;
+    }
+
+        .lp-listing-edit:hover {
+            background: #fffbeb;
+            border-color: #f59e0b;
+        }
+
+    .lp-listing-view {
+        color: #0369a1;
+    }
+
+        .lp-listing-view:hover {
+            background: #e0f2fe;
+            border-color: #0369a1;
+        }
+
+    @@media (max-width: 768px) {
+        .lp-profile-container {
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .lp-profile-content {
+            flex-direction: column;
+        }
+
+        .lp-profile-image-wrapper {
+            width: 100px;
+            height: 100px;
+        }
+
+        .lp-profile-name {
+            font-size: 24px;
+        }
+
+        .lp-profile-actions {
+            width: 100%;
+        }
+
+        .lp-btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .lp-listings-grid {
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+    }
+</style>

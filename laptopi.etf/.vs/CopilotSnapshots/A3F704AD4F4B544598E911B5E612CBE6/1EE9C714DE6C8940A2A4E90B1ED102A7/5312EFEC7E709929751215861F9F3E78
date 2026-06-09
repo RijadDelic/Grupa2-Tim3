@@ -1,0 +1,10 @@
+﻿@model laptopi.etf1.Models.ApplicationUser
+
+<h2>@Model.ime @Model.prezime</h2>
+
+<p>Email: @Model.Email</p>
+
+<a href="mailto:@Model.Email"
+   class="btn btn-success">
+    Kontaktiraj prodavača
+</a>

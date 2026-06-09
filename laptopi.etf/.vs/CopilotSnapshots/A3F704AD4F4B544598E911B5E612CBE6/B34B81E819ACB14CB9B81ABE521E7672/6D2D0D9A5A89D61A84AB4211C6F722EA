@@ -1,0 +1,168 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using laptopi.etf1.Models;
+using laptopi.etf1.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace laptopi.etf1.Controllers
+{
+    public class AccountController : Controller
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
+
+        public AccountController(UserManager<ApplicationUser> userManager,
+                                 SignInManager<ApplicationUser> signInManager,
+                                 ApplicationDbContext context)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _context = context;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Register() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = new ApplicationUser
+            {
+                UserName = model.email,
+                Email = model.email,
+                ime = model.ime,
+                prezime = model.prezime,
+                uloga = Models.@enum.Uloga.Korisnik,
+                datumRegistracije = DateTime.UtcNow,
+                aktivan = true
+            };
+
+            var result = await _userManager.CreateAsync(user, model.password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+
+                return View(model);
+            }
+
+            // Dodijeli ulogu — string mora biti isti kao u SeedRoles
+            await _userManager.AddToRoleAsync(user, user.uloga.ToString());
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public IActionResult Login() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var result = await _signInManager.PasswordSignInAsync(
+                model.email,
+                model.password,
+                model.rememberMe,
+                lockoutOnFailure: false
+            );
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Pogrešan email ili lozinka.");
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+        public async Task<IActionResult> Profil(string id)
+        {
+            var korisnik = await _userManager.FindByIdAsync(id);
+
+            if (korisnik == null)
+                return NotFound();
+
+            // Dohvati oglase prodavaca
+            var oglasi = await _context.Artikal
+                .Where(a => a.UserId == id)
+                .OrderByDescending(a => a.datumObjave)
+                .ToListAsync();
+            ViewBag.Oglasi = oglasi;
+
+            // Provjeri je li trenutni korisnik vlasnik profila
+            var currentUserId = _userManager.GetUserId(User);
+            ViewBag.IsOwner = currentUserId == id;
+
+            return View(korisnik);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UploadProfileImage(IFormFile profileImage)
+        {
+            var userId = _userManager.GetUserId(User);
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+                return NotFound();
+
+            if (profileImage != null && profileImage.Length > 0)
+            {
+                var dozvoljeniTipovi = new[] { "image/jpeg", "image/png", "image/webp" };
+                if (!dozvoljeniTipovi.Contains(profileImage.ContentType))
+                {
+                    TempData["ErrorMessage"] = "Dozvoljeni formati su JPG, PNG i WEBP.";
+                    return RedirectToAction("Profil", new { id = userId });
+                }
+
+                if (profileImage.Length > 2 * 1024 * 1024)
+                {
+                    TempData["ErrorMessage"] = "Slika ne smije biti veća od 2MB.";
+                    return RedirectToAction("Profil", new { id = userId });
+                }
+
+                // Obriši staru sliku ako postoji
+                if (!string.IsNullOrEmpty(user.profileImagePath))
+                {
+                    var staraSlika = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.profileImagePath.TrimStart('/'));
+                    if (System.IO.File.Exists(staraSlika))
+                        System.IO.File.Delete(staraSlika);
+                }
+
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "profiles");
+                Directory.CreateDirectory(uploadsFolder);
+
+                var ekstenzija = Path.GetExtension(profileImage.FileName);
+                var imeFajla = $"{userId}{ekstenzija}";
+                var putanja = Path.Combine(uploadsFolder, imeFajla);
+
+                using (var stream = new FileStream(putanja, FileMode.Create))
+                {
+                    await profileImage.CopyToAsync(stream);
+                }
+
+                user.profileImagePath = $"/uploads/profiles/{imeFajla}";
+                await _userManager.UpdateAsync(user);
+
+                TempData["SuccessMessage"] = "Profilna slika uspješno ažurirana!";
+            }
+
+            return RedirectToAction("Profil", new { id = userId });
+        }
+    }
+    }
