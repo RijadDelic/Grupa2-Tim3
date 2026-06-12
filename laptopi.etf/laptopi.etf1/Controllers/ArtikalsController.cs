@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+[Authorize]
 public class ArtikalsController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -21,6 +22,7 @@ public class ArtikalsController : Controller
     {
         var userId = _userManager.GetUserId(User);
         var artikli = await _context.Artikal
+            .Include(a => a.Slike)
             .Where(a => a.UserId == userId)
             .ToListAsync();
         return View(artikli);
@@ -54,10 +56,9 @@ public class ArtikalsController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(
-        [Bind("ArtikalId,naziv,opis,stranje,tipTransakcije,datumObjave,aktivnost,prosjecnaOcjena,kategorija,cijena")] Artikal artikal,
-        List<IFormFile>? slike)
+    [Bind("ArtikalId,naziv,opis,stranje,tipTransakcije,datumObjave,aktivnost,prosjecnaOcjena,kategorija,cijena")] Artikal artikal,
+    List<IFormFile>? slike)
     {
-        // collect files from binding or Request.Form.Files
         var files = (slike != null && slike.Count > 0) ? slike : new List<IFormFile>();
         if ((files == null || files.Count == 0) && Request?.Form?.Files != null && Request.Form.Files.Count > 0)
         {
@@ -120,6 +121,7 @@ public class ArtikalsController : Controller
         }
 
         return View(artikal);
+    return RedirectToAction(nameof(Index));
     }
 
     // GET: ARTIKALS/Edit/5
@@ -342,5 +344,83 @@ public class ArtikalsController : Controller
     private bool ArtikalExists(int? artikalid)
     {
         return _context.Artikal.Any(e => e.ArtikalId == artikalid);
+    }
+    // POST: Artikals/ObrisiSliku
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> ObrisiSliku(int slikaId)
+    {
+        var slika = await _context.SlikaArtikla.FindAsync(slikaId);
+        if (slika == null) return Json(new { success = false });
+
+        var artikal = await _context.Artikal.FindAsync(slika.artikalId);
+        var userId = _userManager.GetUserId(User);
+        if (artikal == null || artikal.UserId != userId) return Json(new { success = false });
+
+        // Obriši fajl sa diska
+        var putanja = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", slika.putanjaDatoteke.TrimStart('/'));
+        if (System.IO.File.Exists(putanja))
+            System.IO.File.Delete(putanja);
+
+        _context.SlikaArtikla.Remove(slika);
+
+        // Ako je bila glavna slika, postavi prvu sljedeću
+        if (artikal.slikaPath == slika.putanjaDatoteke)
+        {
+            var sljedeca = await _context.SlikaArtikla
+                .Where(s => s.artikalId == slika.artikalId && s.slikaId != slikaId)
+                .FirstOrDefaultAsync();
+            artikal.slikaPath = sljedeca?.putanjaDatoteke;
+            _context.Update(artikal);
+        }
+
+        await _context.SaveChangesAsync();
+        return Json(new { success = true });
+    }
+
+    // POST: Artikals/DodajSliku
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> DodajSliku(int artikalId, IFormFile slika)
+    {
+        var artikal = await _context.Artikal.FindAsync(artikalId);
+        var userId = _userManager.GetUserId(User);
+        if (artikal == null || artikal.UserId != userId)
+            return Json(new { success = false });
+
+        var dozvoljeniTipovi = new[] { "image/jpeg", "image/png", "image/webp" };
+        if (!dozvoljeniTipovi.Contains(slika.ContentType) || slika.Length > 5 * 1024 * 1024)
+            return Json(new { success = false, poruka = "Neispravan fajl." });
+
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+        Directory.CreateDirectory(uploadsFolder);
+        var ekstenzija = Path.GetExtension(slika.FileName);
+        var imeFajla = $"{Guid.NewGuid()}{ekstenzija}";
+        var putanja = Path.Combine(uploadsFolder, imeFajla);
+
+        using (var stream = new FileStream(putanja, FileMode.Create))
+            await slika.CopyToAsync(stream);
+
+        var novaSlikaPath = $"/uploads/{imeFajla}";
+        _context.SlikaArtikla.Add(new SlikaArtikla { putanjaDatoteke = novaSlikaPath, artikalId = artikalId });
+
+        if (string.IsNullOrEmpty(artikal.slikaPath))
+        {
+            artikal.slikaPath = novaSlikaPath;
+            _context.Update(artikal);
+        }
+
+        await _context.SaveChangesAsync();
+        return Json(new { success = true, putanja = novaSlikaPath });
+    }
+
+    // GET: Artikals/GetSlike
+    public async Task<IActionResult> GetSlike(int artikalId)
+    {
+        var slike = await _context.SlikaArtikla
+            .Where(s => s.artikalId == artikalId)
+            .Select(s => new { s.slikaId, s.putanjaDatoteke })
+            .ToListAsync();
+        return Json(slike);
     }
 }

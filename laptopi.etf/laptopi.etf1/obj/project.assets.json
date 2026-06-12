@@ -7799,11 +7799,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\noape\\Desktop\\laptopi.etf(Harun verzija)\\laptopi.etf(Harun verzija)\\laptopi.etf1\\laptopi.etf1.csproj",
+      "projectUniqueName": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf\\laptopi.etf1\\laptopi.etf1.csproj",
       "projectName": "laptopi.etf1",
-      "projectPath": "C:\\Users\\noape\\Desktop\\laptopi.etf(Harun verzija)\\laptopi.etf(Harun verzija)\\laptopi.etf1\\laptopi.etf1.csproj",
+      "projectPath": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf\\laptopi.etf1\\laptopi.etf1.csproj",
       "packagesPath": "C:\\Users\\noape\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\noape\\Desktop\\laptopi.etf(Harun verzija)\\laptopi.etf(Harun verzija)\\laptopi.etf1\\obj\\",
+      "outputPath": "C:\\Users\\noape\\Desktop\\OOAD\\Grupa2-Tim3\\laptopi.etf\\laptopi.etf1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

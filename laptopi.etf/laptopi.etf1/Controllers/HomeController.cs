@@ -18,7 +18,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index(string? pretraga, string? stanje, string? tipTransakcije, string? sortiranje, string? cijenaRange)
     {
-        var artikli = _context.Artikal.Include(a => a.Slike).AsQueryable();
+        var artikli = _context.Artikal.Include(a => a.Slike).Include(a => a.User).AsQueryable();
 
         if (!string.IsNullOrEmpty(pretraga))
             artikli = artikli.Where(a => a.naziv.Contains(pretraga) || a.opis.Contains(pretraga));

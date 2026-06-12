@@ -72,7 +72,7 @@ async Task SeedAdmin(WebApplication app)
     using var scope = app.Services.CreateScope();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-    var adminEmail = "admin@laptopi.etf";
+    var adminEmail = "npetrovic1@etf.unsa.ba";
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
     if (adminUser == null)
@@ -92,8 +92,35 @@ async Task SeedAdmin(WebApplication app)
         await userManager.AddToRoleAsync(adminUser, "Admin");
     }
 }
+async Task SeedModerator(WebApplication app)
+{
+    using var scope = app.Services.CreateScope();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+    var moderatorEmail = "rdelic1@etf.unsa.ba";
+    var moderatorUser = await userManager.FindByEmailAsync(moderatorEmail);
+
+    if (moderatorUser == null)
+    {
+        moderatorUser = new ApplicationUser
+        {
+            UserName = moderatorEmail,
+            Email = moderatorEmail,
+            EmailConfirmed = true,
+            ime = "Moderator",
+            prezime = "Moderator",
+            datumRegistracije = DateTime.Now,
+            aktivan = true
+        };
+
+        await userManager.CreateAsync(moderatorUser, "Moderator@123");
+        await userManager.AddToRoleAsync(moderatorUser, "Moderator");
+    }
+}
+
 
 await SeedRoles(app);
 await SeedAdmin(app);
+await SeedModerator(app);
 
 app.Run();

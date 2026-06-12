@@ -17,9 +17,7 @@
             <h2 class="lp-index-title">Moji oglasi</h2>
             @if (TempData["SuccessMessage"] != null)
             {
-                <div class="alert alert-success">
-                    @TempData["SuccessMessage"]
-                </div>
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
             }
             <p class="lp-index-count">@Model.Count() oglasa ukupno</p>
         </div>
@@ -48,11 +46,16 @@
         <div class="lp-grid">
             @foreach (var item in Model)
             {
+                var prvaSlikaPath = item.Slike != null && item.Slike.Any()
+                    ? item.Slike.First().putanjaDatoteke
+                    : item.slikaPath;
+                var brojSlika = item.Slike != null ? item.Slike.Count : 0;
+
                 <div class="lp-card">
                     <div class="lp-card-img">
-                        @if (!string.IsNullOrEmpty(item.slikaPath))
+                        @if (!string.IsNullOrEmpty(prvaSlikaPath))
                         {
-                            <img src="@item.slikaPath" alt="@item.naziv" />
+                            <img src="@prvaSlikaPath" alt="@item.naziv" />
                         }
                         else
                         {
@@ -69,7 +72,17 @@
                                 @item.stranje
                             </span>
                             <span class="lp-badge lp-badge-kat">@item.kategorija</span>
+                            <span class="lp-badge @(item.tipTransakcije.ToString() == "Iznajmljivanje" ? "lp-badge-iznajm" : "lp-badge-prodaja")">
+                                @item.tipTransakcije
+                            </span>
                         </div>
+                        @if (brojSlika > 1)
+                        {
+                            <span class="lp-slike-overlay">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
+                                @brojSlika
+                            </span>
+                        }
                         @if (item.prosjecnaOcjena > 0)
                         {
                             <span class="lp-ocjena-overlay">
@@ -176,7 +189,12 @@
         border-radius: 6px;
         transition: background 0.15s, color 0.15s;
     }
-
+    @if (TempData["Debug"] != null)
+{
+    <div style="background:#e0f2fe; padding:10px; border-radius:8px; margin-bottom:16px; font-size:13px;">
+        @TempData["Debug"]
+    </div>
+}
         .lp-back-btn:hover {
             background: #1e2a38;
             color: #fff;
@@ -301,6 +319,8 @@
         left: 10px;
         display: flex;
         gap: 5px;
+        flex-wrap: wrap;
+        max-width: 80%;
     }
 
     .lp-badge {
@@ -326,12 +346,37 @@
         color: #fff;
     }
 
+    .lp-badge-iznajm {
+        background: #e0f2fe;
+        color: #0369a1;
+    }
+
+    .lp-badge-prodaja {
+        background: #e6f4ea;
+        color: #2d7a3f;
+    }
+
     .lp-ocjena-overlay {
         position: absolute;
         bottom: 10px;
         right: 10px;
         background: rgba(0,0,0,0.55);
         color: #f59e0b;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .lp-slike-overlay {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.55);
+        color: #fff;
         font-size: 12px;
         font-weight: 700;
         padding: 3px 8px;

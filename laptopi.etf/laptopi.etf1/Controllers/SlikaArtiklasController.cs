@@ -1,8 +1,9 @@
 
+using laptopi.etf1.Data;
+using laptopi.etf1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using laptopi.etf1.Models;
-using laptopi.etf1.Data;
 
 public class SlikaArtiklasController : Controller
 {

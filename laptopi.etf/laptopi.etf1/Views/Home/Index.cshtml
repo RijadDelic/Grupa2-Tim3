@@ -23,7 +23,12 @@
         <div class="d-flex align-items-center flex-shrink-0 gap-2">
             @if (SignInManager.IsSignedIn(User))
             {
-                <span class="text-white text-nowrap" style="font-size:13px;">Zdravo, @(UserManager.GetUserAsync(User).Result?.ime + " " + UserManager.GetUserAsync(User).Result?.prezime ?? UserManager.GetUserName(User))!</span>
+                var trenutniKorisnik = UserManager.GetUserAsync(User).Result;
+                var pozdravIme = User.IsInRole("Admin") ? "Admin" :
+                                 User.IsInRole("Moderator") ? "Moderator" :
+                                 ((trenutniKorisnik?.ime ?? "") + " " + (trenutniKorisnik?.prezime ?? "")).Trim();
+                if (string.IsNullOrEmpty(pozdravIme)) pozdravIme = UserManager.GetUserName(User);
+                <span class="text-white text-nowrap" style="font-size:13px;">Zdravo, @(pozdravIme)!</span>
                 <a asp-controller="Artikals" asp-action="Index" class="btn btn-outline-light btn-sm">Moji oglasi</a>
                 <a asp-controller="Artikals" asp-action="Create" class="btn btn-primary btn-sm">+ Dodaj</a>
                 <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
@@ -70,27 +75,31 @@
         <input type="hidden" name="stanje" value="@ViewBag.Stanje" />
         <input type="hidden" name="tipTransakcije" value="@ViewBag.TipTransakcije" />
 
-        @{ var __sort = ViewBag.Sortiranje as string ?? ""; var __cr = ViewBag.CijenaRange as string ?? "all"; }
+        @{
+            var __sort = ViewBag.Sortiranje as string ?? ""; var __cr = ViewBag.CijenaRange as string ?? "all";
+        }
+
         <select name="sortiranje" class="form-select w-auto" onchange="this.form.submit()">
             <option value="">Sortiraj</option>
-            <option value="ocjena_desc" selected="@( __sort == "ocjena_desc" ? "selected" : null )">Po ocjeni prodavača (najbolje)</option>
-            <option value="ocjena_asc" selected="@( __sort == "ocjena_asc" ? "selected" : null )">Po ocjeni prodavača (najlošije)</option>
-            <option value="cijena_asc" selected="@( __sort == "cijena_asc" ? "selected" : null )">Po cijeni (rastuce)</option>
-            <option value="cijena_desc" selected="@( __sort == "cijena_desc" ? "selected" : null )">Po cijeni (opadajuce)</option>
+            <option value="ocjena_desc" selected="@(__sort == "ocjena_desc")">Po ocjeni (najbolje)</option>
+            <option value="ocjena_asc" selected="@(__sort == "ocjena_asc")">Po ocjeni (najlošije)</option>
+            <option value="cijena_asc" selected="@(__sort == "cijena_asc")">Cijena: rastuće</option>
+            <option value="cijena_desc" selected="@(__sort == "cijena_desc")">Cijena: opadajuće</option>
         </select>
 
         <select name="cijenaRange" class="form-select w-auto" onchange="this.form.submit()">
-            <option value="all" selected="@( string.IsNullOrEmpty(__cr) || __cr == "all" ? "selected" : null )">Sve cijene</option>
-            <option value="0-200" selected="@( __cr == "0-200" ? "selected" : null )">0 - 200 KM</option>
-            <option value="200-500" selected="@( __cr == "200-500" ? "selected" : null )">200 - 500 KM</option>
-            <option value="500-1000" selected="@( __cr == "500-1000" ? "selected" : null )">500 - 1000 KM</option>
-            <option value="1000+" selected="@( __cr == "1000+" ? "selected" : null )">1000+ KM</option>
+            <option value="all" selected="@(__cr == "all" || string.IsNullOrEmpty(__cr))">Sve cijene</option>
+            <option value="0-200" selected="@(__cr == "0-200")">0 - 200 KM</option>
+            <option value="200-500" selected="@(__cr == "200-500")">200 - 500 KM</option>
+            <option value="500-1000" selected="@(__cr == "500-1000")">500 - 1000 KM</option>
+            <option value="1000+" selected="@(__cr == "1000+")">1000+ KM</option>
         </select>
     </form>
 
     <form method="get" asp-controller="Home" asp-action="Index" class="d-flex">
         <input type="hidden" name="pretraga" value="@ViewBag.Pretraga" />
         <input type="hidden" name="tipTransakcije" value="@ViewBag.TipTransakcije" />
+        <input type="hidden" name="sortiranje" value="@ViewBag.Sortiranje" />
         <div class="btn-group">
             <button type="submit" name="stanje" value=""
                     class="btn @(string.IsNullOrEmpty(ViewBag.Stanje as string) ? "btn-dark" : "btn-outline-secondary")">
@@ -141,6 +150,11 @@
                     ? emailMap[artikal.UserId] : "";
                 var ocjenaKorisnika = artikal.UserId != null && ocjeneMap.ContainsKey(artikal.UserId)
                     ? ocjeneMap[artikal.UserId] : "N/A";
+                var slikeStr = "";
+                if (artikal.Slike != null && artikal.Slike.Any())
+                    slikeStr = string.Join(";", artikal.Slike.Select(s => s.putanjaDatoteke));
+                else if (!string.IsNullOrEmpty(artikal.slikaPath))
+                    slikeStr = artikal.slikaPath;
 
                 <div class="col" style="position:relative;">
                     @if (isAdmin)
@@ -155,10 +169,38 @@
                             </button>
                         </form>
                     }
-                    <div class="card h-100 shadow-sm">
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Moderator"))
+                    {
+                        <button type="button"
+                                onclick="flagirajOglas('@artikal.ArtikalId', '@Html.Raw(artikal.naziv.Replace("'", "\\'"))', '@artikal.UserId')"
+                                style="position:absolute; top:16px; left:16px; z-index:10; width:28px; height:28px; border-radius:50%; background:#f59e0b; border:none; color:#fff; font-size:16px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow: 0 2px 8px rgba(245,158,11,0.4);"
+                                title="Prijavi oglas adminu">
+                            🚩
+                        </button>
+                    }
+                    <div class="card h-100 shadow-sm" style="position:relative;">
+                        @{
+                            var brojSlika2 = artikal.Slike != null && artikal.Slike.Any()
+                                ? artikal.Slike.Count
+                                : (!string.IsNullOrEmpty(artikal.slikaPath) ? 1 : 0);
+                        }
+                        @if (brojSlika2 > 1)
+                        {
+                            <div style="position:absolute; bottom:calc(200px + 10px); left:10px; background:rgba(0,0,0,0.5); color:#fff; font-size:11px; font-weight:600; padding:2px 8px; border-radius:20px; z-index:5; display:flex; align-items:center; gap:4px;">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
+                                @brojSlika2
+                            </div>
+                        }
                         @if (!string.IsNullOrEmpty(artikal.slikaPath))
                         {
                             <img src="@artikal.slikaPath"
+                                 class="card-img-top"
+                                 style="height: 200px; object-fit: cover;"
+                                 alt="@artikal.naziv">
+                        }
+                        else if (artikal.Slike != null && artikal.Slike.Any())
+                        {
+                            <img src="@artikal.Slike.First().putanjaDatoteke"
                                  class="card-img-top"
                                  style="height: 200px; object-fit: cover;"
                                  alt="@artikal.naziv">
@@ -186,7 +228,8 @@
                                     @if (artikal.cijena > 0)
                                     {
                                         var unit = artikal.tipTransakcije.ToString() == "Iznajmljivanje" ? " KM/dan" : " KM";
-                                        @artikal.cijena.ToString("0.00") @unit
+                                        @artikal.cijena.ToString("0.00")
+                                        @unit
                                     }
                                     else
                                     {
@@ -199,8 +242,10 @@
                             </div>
                         </div>
                         <div class="card-footer bg-white border-0">
-                            <button class="btn btn-dark w-100"
-                                    onclick="otvoriDetalje(
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <button class="btn btn-dark w-100"
+                                        onclick="otvoriDetalje(
                                     '@Html.Raw(artikal.naziv.Replace("'", "\\'"))',
                                     '@Html.Raw((artikal.opis ?? "").Replace("'", "\\'"))',
                                     '@artikal.stranje',
@@ -213,11 +258,18 @@
                                     '@ocjenaKorisnika',
                                     '@artikal.ArtikalId',
                                     '@artikal.tipTransakcije',
-                                    '@(artikal.User != null ? (artikal.User.ime + " " + artikal.User.prezime) : "")',
-                                    '@Html.Raw(string.Join(";", artikal.Slike.Select(s => s.putanjaDatoteke)).Replace("'", "\\'"))'
+                                    '@Html.Raw(((artikal.User != null ? artikal.User.ime + " " + artikal.User.prezime : "")).Replace("'", "\\'"))',
+                                    '@Html.Raw(slikeStr.Replace("'", "\\'"))'
                                     )">
-                                Pogledaj detalje
-                            </button>
+                                    Pogledaj detalje
+                                </button>
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-dark w-100">
+                                    Pogledaj detalje
+                                </a>
+                            }
                         </div>
                     </div>
                 </div>
@@ -230,9 +282,22 @@
 <div id="detaljiModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1050; align-items:center; justify-content:center; padding: 16px;">
     <div style="background:#fff; border-radius:16px; width:100%; max-width:520px; max-height:90vh; overflow-y:auto; box-shadow: 0 8px 40px rgba(0,0,0,0.18);">
 
-        <div id="modalImgWrap" style="height:240px; background:#f0f4f8; border-radius:16px 16px 0 0; overflow:hidden;">
+        <div id="modalImgWrap" style="height:240px; background:#f0f4f8; border-radius:16px 16px 0 0; overflow:hidden; position:relative;">
             <img id="modalSlika" src="" alt="" style="width:100%; height:100%; object-fit:cover; display:none;" />
             <div id="modalSlikaPlaceholder" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:56px;">💻</div>
+
+            <!-- Strelice -->
+            <button id="btnPrev" onclick="promijeniSliku(-1)"
+                    style="display:none; position:absolute; left:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.45); border:none; color:#fff; width:36px; height:36px; border-radius:50%; font-size:18px; cursor:pointer; line-height:1;">
+                ‹
+            </button>
+            <button id="btnNext" onclick="promijeniSliku(1)"
+                    style="display:none; position:absolute; right:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.45); border:none; color:#fff; width:36px; height:36px; border-radius:50%; font-size:18px; cursor:pointer; line-height:1;">
+                ›
+            </button>
+
+            <!-- Indikator -->
+            <div id="modalSlikaIndikator" style="display:none; position:absolute; bottom:8px; right:10px; background:rgba(0,0,0,0.5); color:#fff; font-size:11px; font-weight:600; padding:2px 8px; border-radius:20px;"></div>
         </div>
         <div style="padding:0 28px 12px;">
             <div id="modalThumbs" style="display:flex; gap:8px; overflow:auto; padding:6px 0;"></div>
@@ -264,6 +329,14 @@
             </div>
 
             <div style="margin-bottom:18px;">
+                <p style="margin:0 0 8px; font-size:11px; color:#aaa; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Prodavač</p>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+                    <p id="modalProdavac" style="margin:0; font-size:13px; color:#555;"></p>
+                    <button id="modalZalbaBtn" type="button" onclick="podnesiZalbu()"
+                            style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; background:#fde8e8; color:#e05252; border:1px solid #e05252; cursor:pointer; white-space:nowrap;">
+                        ✉️ Podnesi žalbu
+                    </button>
+                </div>
                 <p style="margin:0 0 8px; font-size:11px; color:#aaa; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Opis</p>
                 <p id="modalOpis" style="margin:0; font-size:14px; color:#444; line-height:1.65;"></p>
             </div>
@@ -395,9 +468,15 @@
     var kalZauzetiDatumi = [];
     var mjeseci = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'Septembar', 'Oktobar', 'Novembar', 'Decembar'];
     var dani = ['Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub', 'Ned'];
+    var modalImgs = [];
+    var modalTrenutnaSlika = 0;
 
     function otvoriDetalje(naziv, opis, stanje, kategorija, cijena, ocjena, datum, email, userId, ocjenaKorisnika, artikalId, tipTransakcije, prodavacIme, images) {
+        console.log('images:', images);
         trenutniUserId = userId;
+        trenutniProdavacIme = prodavacIme;
+        trenutniNazivArtikla = naziv;
+        trenutniArtikalId = artikalId;
 
         document.getElementById('modalNaziv').textContent = naziv;
         document.getElementById('modalOpis').textContent = opis || 'Nema opisa.';
@@ -405,6 +484,12 @@
         document.getElementById('modalCijena').textContent = (parseFloat(cijena) > 0 ? cijena + unit : 'Cijena na upit');
         document.getElementById('modalDatum').textContent = datum;
         document.getElementById('modalOcjenaKorisnika').textContent = ocjenaKorisnika !== 'N/A' ? '⭐ ' + ocjenaKorisnika : 'Još nije ocijenjen';
+        var prodavacEl = document.getElementById('modalProdavac');
+        if (prodavacIme && prodavacIme.trim() !== '' && userId && userId.trim() !== '') {
+            prodavacEl.innerHTML = '<a href="/Account/Profil?id=' + encodeURIComponent(userId) + '" style="color:#1e2a38; font-weight:500; text-decoration:underline;">' + prodavacIme + '</a>';
+        } else {
+            prodavacEl.textContent = 'Nepoznat';
+        }
 
         var stanjeEl = document.getElementById('modalStanje');
         stanjeEl.textContent = stanje;
@@ -412,58 +497,85 @@
         stanjeEl.style.color = stanje === 'Novo' ? '#2d7a3f' : '#b45309';
 
         document.getElementById('modalKategorija').textContent = kategorija;
+
         var tipEl = document.getElementById('modalTipTransakcije');
         tipEl.textContent = tipTransakcije;
         tipEl.style.background = tipTransakcije === 'Iznajmljivanje' ? '#e0f2fe' : '#e6f4ea';
         tipEl.style.color = tipTransakcije === 'Iznajmljivanje' ? '#0369a1' : '#2d7a3f';
 
+        // Slike
+        // Slike
+        
+
         var img = document.getElementById('modalSlika');
         var placeholder = document.getElementById('modalSlikaPlaceholder');
         var thumbs = document.getElementById('modalThumbs');
+        var btnPrev = document.getElementById('btnPrev');
+        var btnNext = document.getElementById('btnNext');
+        var indikator = document.getElementById('modalSlikaIndikator');
         thumbs.innerHTML = '';
+        modalImgs = [];
+        modalTrenutnaSlika = 0;
 
-        var imgs = [];
         if (images && images.trim() !== '') {
-            imgs = images.split(';').filter(s => s && s.trim() !== '');
+            modalImgs = images.split(';').filter(s => s && s.trim() !== '');
         }
 
-        if (imgs.length > 0) {
-            img.src = imgs[0];
+        if (modalImgs.length > 0) {
+            img.src = modalImgs[0];
             img.style.display = 'block';
             placeholder.style.display = 'none';
 
-            imgs.forEach(function(p) {
-                var t = document.createElement('img');
-                t.src = p;
-                t.style.width = '64px';
-                t.style.height = '48px';
-                t.style.objectFit = 'cover';
-                t.style.borderRadius = '6px';
-                t.style.cursor = 'pointer';
-                t.onclick = function() { img.src = p; };
-                thumbs.appendChild(t);
-            });
+            if (modalImgs.length > 1) {
+                btnPrev.style.display = 'block';
+                btnNext.style.display = 'block';
+                indikator.style.display = 'block';
+                indikator.textContent = '1 / ' + modalImgs.length;
+
+                modalImgs.forEach(function (p, i) {
+                    var t = document.createElement('img');
+                    t.src = p;
+                    t.style.width = '64px';
+                    t.style.height = '48px';
+                    t.style.objectFit = 'cover';
+                    t.style.borderRadius = '6px';
+                    t.style.cursor = 'pointer';
+                    t.style.border = i === 0 ? '2px solid #1e2a38' : '2px solid transparent';
+                    t.onclick = function () {
+                        modalTrenutnaSlika = i;
+                        azurirajSliku();
+                    };
+                    thumbs.appendChild(t);
+                });
+            } else {
+                btnPrev.style.display = 'none';
+                btnNext.style.display = 'none';
+                indikator.style.display = 'none';
+            }
         } else {
             img.style.display = 'none';
             placeholder.style.display = 'flex';
+            btnPrev.style.display = 'none';
+            btnNext.style.display = 'none';
+            indikator.style.display = 'none';
         }
 
         var mailBtn = document.getElementById('modalMailBtn');
         if (email && email.trim() !== '') {
-            mailBtn.href = 'mailto:' + email + '?subject=Upit za laptop: ' + encodeURIComponent(naziv);
+            mailBtn.href = '#';
+            mailBtn.onclick = function (e) {
+                e.preventDefault();
+                var subject = 'Upit za laptop: ' + naziv;
+                var body = 'Pozdrav,\n\nZainteresiran sam za vaš oglas: ' + naziv;
+                window.open('https://mail.google.com/mail/?view=cm&to=' + encodeURIComponent(email) + '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), '_blank');
+            };
             mailBtn.style.opacity = '1';
             mailBtn.style.pointerEvents = 'auto';
         } else {
             mailBtn.href = '#';
+            mailBtn.onclick = null;
             mailBtn.style.opacity = '0.4';
             mailBtn.style.pointerEvents = 'none';
-        }
-
-        // link to open full details in new tab
-        var fullBtn = document.getElementById('modalOpenFull');
-        if (fullBtn) {
-            fullBtn.href = '/Artikals/Details?artikalid=' + encodeURIComponent(artikalId);
-            fullBtn.target = '_blank';
         }
 
         // Kalendar
@@ -490,15 +602,6 @@
         });
         document.getElementById('ocjenaPortuka').textContent = '';
 
-        // Prikaz imena prodavca i link na profil
-        var sellerHtml = '';
-        if (prodavacIme && prodavacIme.trim() !== '' && userId && userId.trim() !== '') {
-            sellerHtml = '<div style="margin-bottom:8px; font-size:13px; color:#555;">Prodavac: <a href="/Account/Profil?id=' + encodeURIComponent(userId) + '">' + prodavacIme + '</a></div>';
-        }
-        // insert seller info above opis
-        var opisEl = document.getElementById('modalOpis');
-        opisEl.insertAdjacentHTML('beforebegin', sellerHtml);
-
         document.getElementById('detaljiModal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
@@ -510,6 +613,9 @@
         var prviDan = new Date(kalGodina, kalMjesec, 1);
         var zadnjiDan = new Date(kalGodina, kalMjesec + 1, 0);
         var pocetakDana = (prviDan.getDay() + 6) % 7;
+        var trenutniProdavacIme = '';
+        var trenutniNazivArtikla = '';
+        var trenutniArtikalId = '';
 
         var html = '<div class="kal-header">';
         html += '<button class="kal-nav" onclick="kalPromijeniMjesec(-1)">‹</button>';
@@ -600,4 +706,35 @@
                 }
             });
     }
+    function promijeniSliku(smjer) {
+        modalTrenutnaSlika += smjer;
+        if (modalTrenutnaSlika < 0) modalTrenutnaSlika = modalImgs.length - 1;
+        if (modalTrenutnaSlika >= modalImgs.length) modalTrenutnaSlika = 0;
+        azurirajSliku();
+    }
+
+    function azurirajSliku() {
+        var img = document.getElementById('modalSlika');
+        var indikator = document.getElementById('modalSlikaIndikator');
+        var thumbs = document.getElementById('modalThumbs');
+        img.src = modalImgs[modalTrenutnaSlika];
+        indikator.textContent = (modalTrenutnaSlika + 1) + ' / ' + modalImgs.length;
+        thumbs.querySelectorAll('img').forEach(function (t, i) {
+            t.style.borderColor = i === modalTrenutnaSlika ? '#1e2a38' : 'transparent';
+        });
+    }
+    function flagirajOglas(artikalId, naziv, userId) {
+        var subject = 'Flag: ' + naziv;
+        var body = 'Moderator prijavljuje oglas:\n\nNaziv: ' + naziv + '\nID: ' + artikalId + '\nProdavac ID: ' + userId;
+        window.open('https://mail.google.com/mail/?view=cm&to=npetrovic1@etf.unsa.ba&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), '_blank');
+    }
+    function podnesiZalbu() {
+        var moderatorEmail = 'moderator@laptopi.etf';
+        var subject = 'Žalba na oglas: ' + trenutniNazivArtikla;
+        var body = 'Žalba na oglas:\n\nNaziv: ' + trenutniNazivArtikla + '\nID: ' + trenutniArtikalId + '\nProdavač: ' + trenutniProdavacIme + '\n\nRazlog žalbe:\n<<razlog>>';
+        window.open('https://mail.google.com/mail/?view=cm&to=' + encodeURIComponent(moderatorEmail) + '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), '_blank');
+    }
 </script>
+
+
+

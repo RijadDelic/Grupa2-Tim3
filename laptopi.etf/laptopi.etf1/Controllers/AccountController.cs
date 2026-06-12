@@ -30,11 +30,21 @@ namespace laptopi.etf1.Controllers
         }
 
         [HttpGet]
-        public IActionResult Register() => View();
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+            return View();
+        }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -59,19 +69,28 @@ namespace laptopi.etf1.Controllers
                 return View(model);
             }
 
-            // Dodijeli ulogu — string mora biti isti kao u SeedRoles
             await _userManager.AddToRoleAsync(user, user.uloga.ToString());
-
             await _signInManager.SignInAsync(user, isPersistent: false);
 
             return RedirectToAction("Index", "Home");
         }
+
         [HttpGet]
-        public IActionResult Login() => View();
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+            return View();
+        }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -90,6 +109,7 @@ namespace laptopi.etf1.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
         public async Task<IActionResult> Profil(string id)
         {
             var korisnik = await _userManager.FindByIdAsync(id);
@@ -97,14 +117,12 @@ namespace laptopi.etf1.Controllers
             if (korisnik == null)
                 return NotFound();
 
-            // Dohvati oglase prodavaca
             var oglasi = await _context.Artikal
                 .Where(a => a.UserId == id)
                 .OrderByDescending(a => a.datumObjave)
                 .ToListAsync();
             ViewBag.Oglasi = oglasi;
 
-            // Provjeri je li trenutni korisnik vlasnik profila
             var currentUserId = _userManager.GetUserId(User);
             ViewBag.IsOwner = currentUserId == id;
 
@@ -136,7 +154,6 @@ namespace laptopi.etf1.Controllers
                     return RedirectToAction("Profil", new { id = userId });
                 }
 
-                // Obriši staru sliku ako postoji
                 if (!string.IsNullOrEmpty(user.profileImagePath))
                 {
                     var staraSlika = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.profileImagePath.TrimStart('/'));
@@ -165,4 +182,4 @@ namespace laptopi.etf1.Controllers
             return RedirectToAction("Profil", new { id = userId });
         }
     }
-    }
+}

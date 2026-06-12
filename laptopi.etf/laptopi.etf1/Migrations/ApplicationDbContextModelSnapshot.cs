@@ -246,7 +246,7 @@ namespace laptopi.etf1.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtikalId"));
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("aktivnost")
                         .HasColumnType("bit");
@@ -281,6 +281,8 @@ namespace laptopi.etf1.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ArtikalId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Artikal", (string)null);
                 });
@@ -527,6 +529,15 @@ namespace laptopi.etf1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("laptopi.etf1.Models.Artikal", b =>
+                {
+                    b.HasOne("laptopi.etf1.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("laptopi.etf1.Models.SlikaArtikla", b =>

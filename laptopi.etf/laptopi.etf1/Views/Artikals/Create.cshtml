@@ -110,7 +110,7 @@
                     </div>
                     <img id="previewImg" class="lp-preview-img" style="display:none;" alt="Preview" />
                 </div>
-                <input type="file" name="slike" id="slikeInput" accept="image/*" multiple style="display:none;" onchange="handleFiles(this)" />
+                <input type="file" name="slike[]" id="slikeInput" accept="image/*" multiple style="display:none;" onchange="handleFiles(this)" />
                 <div class="lp-file-info" id="fileInfo" style="display:none;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                     <span id="fileName"></span>
@@ -128,6 +128,12 @@
             </div>
 
         </form>
+        @if (TempData["Debug"] != null)
+        {
+            <div style="background:#e0f2fe; padding:10px; border-radius:8px; margin-bottom:16px; font-size:13px;">
+                @TempData["Debug"]
+            </div>
+        }
     </div>
 </div>
 
@@ -441,107 +447,27 @@
 </style>
 
 <script>
-    // adjust price prefix when transaction type is Iznajmljivanje
-    (function(){
-        var sel = document.querySelector('select[asp-for="tipTransakcije"], select[name="tipTransakcije"]');
-        var prefix = document.querySelector('.lp-prefix');
-        function update() {
-            var val = sel ? (sel.value || sel.options[sel.selectedIndex].value) : '';
-            if (val === 'Iznajmljivanje') prefix.textContent = 'KM/dan';
-            else prefix.textContent = 'KM';
-        }
-        if (sel && prefix) {
-            sel.addEventListener('change', update);
-            update();
-        }
-    })();
-</script>
+    var odabraniFiles = [];
 
-<script>
-    (function() {
-        var dropzone = document.getElementById('dropzone');
-        var slikaInput = document.getElementById('slikeInput');
-
-        function showPreview(file) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var preview = document.getElementById('previewImg');
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-                document.getElementById('dropzoneInner').style.display = 'none';
-            };
-            reader.readAsDataURL(file);
-            document.getElementById('fileName').textContent = file.name;
-            document.getElementById('fileInfo').style.display = 'flex';
-        }
-
-        window.handleFile = function(input) {
-            // when single file chosen via older handlers, add it to multiple input
-            if (input.files && input.files[0]) {
-                var dt = new DataTransfer();
-                // preserve any existing files
-                var existing = slikaInput.files || [];
-                for (var i = 0; i < existing.length; i++) dt.items.add(existing[i]);
-                for (var i = 0; i < input.files.length; i++) dt.items.add(input.files[i]);
-                slikaInput.files = dt.files;
-                showPreviews(slikaInput.files);
-                document.getElementById('dropzoneInner').style.display = 'none';
-            }
-        };
-
-        window.removeFile = function() {
-            // clear all selected files
-            var dt = new DataTransfer();
-            slikaInput.files = dt.files;
-            document.getElementById('previewImg').style.display = 'none';
-            document.getElementById('dropzoneInner').style.display = 'block';
-            document.getElementById('fileInfo').style.display = 'none';
-            document.getElementById('previewGallery').innerHTML = '';
-        };
-
-        function handleDrop(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var files = e.dataTransfer.files;
-                if (files && files.length > 0) {
-                    // merge dropped files with existing selection
-                    var dt = new DataTransfer();
-                    var existing = slikaInput.files || [];
-                    for (var i = 0; i < existing.length; i++) dt.items.add(existing[i]);
-                    for (var i = 0; i < files.length; i++) { var f = files[i]; var key = f.name + '|' + f.size; if (!existingKeys) { dt.items.add(f); } else if (!existingKeys.has(key)) { dt.items.add(f); } }
-                    slikaInput.files = dt.files;
-                    // show gallery previews
-                    showPreviews(slikaInput.files);
-                    document.getElementById('dropzoneInner').style.display = 'none';
-                }
-                dropzone.classList.remove('lp-dropzone-dragover');
-            }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'copy';
-            dropzone.classList.add('lp-dropzone-dragover');
-        }
-
-        function handleDragLeave(e) {
-            dropzone.classList.remove('lp-dropzone-dragover');
-        }
-
-        if (dropzone) {
-            dropzone.addEventListener('dragover', handleDragOver);
-            dropzone.addEventListener('dragleave', handleDragLeave);
-            dropzone.addEventListener('drop', handleDrop);
-        }
-    })();
-</script>
-<script>
-    // multiple files preview handlers
-    function showPreviews(files) {
+    function showPreviews() {
         var gallery = document.getElementById('previewGallery');
         gallery.innerHTML = '';
-        Array.from(files).forEach(function(file, idx) {
+
+        if (odabraniFiles.length === 0) {
+            document.getElementById('dropzoneInner').style.display = 'block';
+            document.getElementById('previewImg').style.display = 'none';
+            return;
+        }
+
+        document.getElementById('dropzoneInner').style.display = 'none';
+
+        odabraniFiles.forEach(function (file, idx) {
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
+                var wrap = document.createElement('div');
+                wrap.style.position = 'relative';
+                wrap.style.display = 'inline-block';
+
                 var img = document.createElement('img');
                 img.src = e.target.result;
                 img.style.width = '120px';
@@ -549,18 +475,13 @@
                 img.style.objectFit = 'cover';
                 img.style.borderRadius = '8px';
                 img.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
-                img.dataset.idx = idx;
-
-                var wrap = document.createElement('div');
-                wrap.style.position = 'relative';
-                wrap.appendChild(img);
 
                 var btn = document.createElement('button');
                 btn.type = 'button';
                 btn.textContent = '×';
                 btn.style.position = 'absolute';
-                btn.style.top = '6px';
-                btn.style.right = '6px';
+                btn.style.top = '4px';
+                btn.style.right = '4px';
                 btn.style.background = 'rgba(0,0,0,0.6)';
                 btn.style.color = '#fff';
                 btn.style.border = 'none';
@@ -568,54 +489,81 @@
                 btn.style.height = '22px';
                 btn.style.borderRadius = '50%';
                 btn.style.cursor = 'pointer';
-                btn.onclick = function() {
-                    removeFile(parseInt(img.dataset.idx));
+                btn.style.fontSize = '14px';
+                btn.style.lineHeight = '1';
+                btn.dataset.idx = idx;
+                btn.onclick = function () {
+                    removeFile(parseInt(this.dataset.idx));
                 };
-                wrap.appendChild(btn);
 
+                wrap.appendChild(img);
+                wrap.appendChild(btn);
                 gallery.appendChild(wrap);
             };
             reader.readAsDataURL(file);
         });
+
+        // Sync sa pravim file inputom
+        syncInput();
+    }
+
+    function syncInput() {
+        var input = document.getElementById('slikeInput');
+        var dt = new DataTransfer();
+        odabraniFiles.forEach(function (f) { dt.items.add(f); });
+        input.files = dt.files;
     }
 
     function handleFiles(input) {
         if (input.files && input.files.length > 0) {
-            // merge with existing files but avoid duplicates (by name + size)
-            var target = document.getElementById('slikeInput');
-            var dt = new DataTransfer();
-            var existing = Array.from(target.files || []);
-            var existingKeys = new Set(existing.map(f => f.name + '|' + f.size));
-            // add existing first
-            existing.forEach(f => dt.items.add(f));
-            // add new ones if not duplicate
-            for (var i = 0; i < input.files.length; i++) {
-                var f = input.files[i];
+            var existingKeys = new Set(odabraniFiles.map(f => f.name + '|' + f.size));
+            Array.from(input.files).forEach(function (f) {
                 var key = f.name + '|' + f.size;
                 if (!existingKeys.has(key)) {
-                    dt.items.add(f);
+                    odabraniFiles.push(f);
                     existingKeys.add(key);
                 }
-            }
-            target.files = dt.files;
-            showPreviews(target.files);
-            document.getElementById('dropzoneInner').style.display = 'none';
+            });
+            showPreviews();
         }
+        // Reset input da može isti fajl biti dodan opet
+        input.value = '';
     }
 
     function removeFile(index) {
-        var input = document.getElementById('slikeInput');
-        if (!input || !input.files) return;
-        var dt = new DataTransfer();
-        Array.from(input.files).forEach(function(f,i){ if (i !== index) dt.items.add(f); });
-        input.files = dt.files;
-        showPreviews(input.files);
-        if (input.files.length === 0) {
-            document.getElementById('dropzoneInner').style.display = 'block';
-        }
+        odabraniFiles.splice(index, 1);
+        showPreviews();
     }
 
-    // Prevent default browser behavior for drag/drop on document to avoid navigating away
+    // Drag and drop
+    var dropzone = document.getElementById('dropzone');
+    if (dropzone) {
+        dropzone.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+            dropzone.classList.add('lp-dropzone-dragover');
+        });
+        dropzone.addEventListener('dragleave', function () {
+            dropzone.classList.remove('lp-dropzone-dragover');
+        });
+        dropzone.addEventListener('drop', function (e) {
+            e.preventDefault();
+            dropzone.classList.remove('lp-dropzone-dragover');
+            var files = e.dataTransfer.files;
+            if (files && files.length > 0) {
+                var existingKeys = new Set(odabraniFiles.map(f => f.name + '|' + f.size));
+                Array.from(files).forEach(function (f) {
+                    var key = f.name + '|' + f.size;
+                    if (!existingKeys.has(key)) {
+                        odabraniFiles.push(f);
+                        existingKeys.add(key);
+                    }
+                });
+                showPreviews();
+            }
+        });
+    }
+
     document.addEventListener('dragover', function (e) { e.preventDefault(); });
     document.addEventListener('drop', function (e) { e.preventDefault(); });
 </script>
